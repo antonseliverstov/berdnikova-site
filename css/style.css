@@ -180,12 +180,18 @@ p{margin:0 0 16px;max-width:680px}
 main:focus{outline:none}
 @media (max-width:900px){.steps{grid-template-columns:1fr}.note{flex-direction:column;gap:10px;padding:24px}}
 
-/* Галерея */
-.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:48px}
-.gallery figure{margin:0}
-.gallery img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--radius)}
-.gallery figcaption{margin-top:10px;font-size:13px;color:var(--linen)}
-@media (max-width:900px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Галерея: мозаика 4 колонки, крупные кадры на 2×2 */
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:240px;grid-auto-flow:dense;gap:16px;margin-top:48px}
+.gallery figure{position:relative;margin:0;overflow:hidden;border-radius:var(--radius);background:var(--ink)}
+.gallery picture,.gallery img{width:100%;height:100%}
+.gallery img{object-fit:cover;transition:transform .6s ease}
+.gallery figure:hover img{transform:scale(1.03)}
+.gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 12px;font-size:13px;color:var(--cream);background:linear-gradient(to top,rgba(31,33,41,.78),rgba(31,33,41,0))}
+.g-xl{grid-column:span 2;grid-row:span 2}
+.g-wide{grid-column:span 2}
+.g-tall{grid-row:span 2}
+@media (max-width:900px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:180px;gap:10px}}
+@media (max-width:480px){.gallery{grid-auto-rows:140px}.gallery figcaption{font-size:12px;padding:22px 10px 8px}}
 
 /* Как добраться */
 .route__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
