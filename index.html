@@ -20,7 +20,7 @@
 <link rel="preload" href="fonts/cormorant-garamond-cyrillic-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/manrope-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
-<script>document.documentElement.classList.remove('no-js')</script>
+<script>document.documentElement.classList.replace('no-js','js')</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"Person","@id":"#person","name":"Юлия Бердникова","jobTitle":"Клинический психолог","address":{"@type":"PostalAddress","addressLocality":"Тула","addressCountry":"RU"},"worksFor":{"@id":"#place"}},
@@ -34,11 +34,11 @@
 <header class="header">
   <div class="wrap header__in">
     <a class="lockup" href="#top" aria-label="Юлия Бердникова, клинический психолог, Тула — в начало страницы">
-      <span class="lockup__prof">клинический психолог · Тула</span>
-      <span class="lockup__name">Юлия Бердникова</span>
-      <span class="lockup__center">Центр психологии и развития</span>
+      <span class="lockup__prof" aria-hidden="true">клинический психолог · Тула</span>
+      <span class="lockup__name" aria-hidden="true">Юлия Бердникова</span>
+      <span class="lockup__center" aria-hidden="true">Центр психологии и развития</span>
     </a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Меню</button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Открыть меню">Меню</button>
     <nav class="nav" id="nav" aria-label="Основное меню">
       <a href="#about">Обо мне</a>
       <a href="#requests">С чем я работаю</a>
@@ -53,15 +53,15 @@
 <main id="main">
 
 <!-- 1. Первый экран -->
-<section class="hero" id="top">
+<section class="hero" id="top" aria-labelledby="hero-title">
   <div class="wrap hero__grid">
     <div>
       <p class="overline">Клинический психолог · Тула и онлайн</p>
-      <h1>Юлия Бердникова</h1>
+      <h1 id="hero-title">Юлия Бердникова</h1>
       <p class="lead">16 лет практики. Работаю со страхами, тревогой и паническими атаками. Принимаю очно в Туле и онлайн.</p>
       <div class="btns">
         <a class="btn btn--gold" href="#contacts">Записаться на консультацию</a>
-        <a class="btn btn--dark" href="#contacts" data-contact="primary">Написать Юлии</a>
+        <a class="btn btn--dark" href="#contacts" data-contact-primary>Написать Юлии</a>
       </div>
     </div>
     <div class="hero__photo">
@@ -72,10 +72,20 @@
       </picture>
     </div>
   </div>
+  <!-- Блок доверия -->
+  <div class="wrap">
+    <ul class="trust" aria-label="Коротко обо мне">
+      <li><span class="trust__value">16 лет</span><span class="trust__label">практики</span></li>
+      <li><span class="trust__value">Клинический психолог</span><span class="trust__label">консультации взрослых от 18 лет</span></li>
+      <li><span class="trust__value">Очно и онлайн</span><span class="trust__label">кабинет в Туле и видеосвязь</span></li>
+      <!-- Награда: скрыта до проверки правил использования. Флаг showAward в config.js -->
+      <li data-flag="showAward" hidden><span class="trust__value">Премия ПроДокторов 2026</span><span class="trust__label">3-е место · категория „Психолог“</span></li>
+    </ul>
+  </div>
 </section>
 
 <!-- 2. Новое место -->
-<section class="dark place" id="place">
+<section class="dark place" id="place" aria-labelledby="place-title">
   <div class="wrap place__grid">
     <div class="reveal">
       <picture>
@@ -83,7 +93,7 @@
         <img class="place__sign" src="img/sign-240.png" width="240" height="263" alt="" loading="lazy">
       </picture>
       <p class="overline">Новое место</p>
-      <h2>Кабинет в «Ликёрке»</h2>
+      <h2 id="place-title">Кабинет в «Ликёрке»</h2>
       <hr class="rule">
       <p>С ноября я принимаю в собственном кабинете: Тула, проспект Ленина, 85. <span class="todo" data-cfg="placeDetails">[уточнить: корпус, этаж, кабинет]</span></p>
       <p class="muted">Диван, кресла и свет из окна. Онлайн-встречи — по видеосвязи.</p>
@@ -100,7 +110,7 @@
 </section>
 
 <!-- 3. Обо мне -->
-<section id="about">
+<section id="about" aria-labelledby="about-title">
   <div class="wrap about__grid">
     <div class="about__photo">
       <picture>
@@ -111,7 +121,7 @@
     </div>
     <div class="reveal">
       <p class="overline">Обо мне</p>
-      <h2>Клинический психолог, 16 лет практики</h2>
+      <h2 id="about-title">Клинический психолог, 16 лет практики</h2>
       <hr class="rule">
       <!-- черновик на согласование -->
       <p>Меня зовут Юлия Бердникова. Я клинический психолог и принимаю очно в своём кабинете в Туле и онлайн — в том числе тех, кто живёт в другом городе.</p>
@@ -126,45 +136,67 @@
         <p class="overline" style="margin-top:40px">Подходы</p>
         <p>Когнитивно-поведенческий подход · экзистенциально-гуманистический подход · транзактный анализ</p>
       </div>
-      <!-- Награда: скрыто до проверки правил использования. Флаг showAward в config.js -->
-      <p class="muted" data-flag="showAward" hidden>Премия ПроДокторов 2026 · 3-е место · категория „Психолог“</p>
     </div>
   </div>
 </section>
 
-<!-- 4. С чем я работаю (лист 02) -->
-<section class="white" id="requests">
+<!-- 4. С чем я работаю: формулировки — о переживаниях, не диагнозы (черновик на согласование) -->
+<section class="white" id="requests" aria-labelledby="requests-title">
   <div class="wrap">
     <div class="head">
-      <div><p class="overline">Запросы</p><h2>С чем я работаю</h2></div>
-      <p class="lead">Группы составлены по списку запросов, с которыми ко мне приходят. Первые две — мои основные направления.</p>
+      <div><p class="overline">Запросы</p><h2 id="requests-title">С чем ко мне приходят</h2></div>
+      <p class="lead">Не нужно знать, как называется ваше состояние. Достаточно рассказать, что с вами происходит, — а разбираться будем вместе.</p>
     </div>
     <div class="groups">
-      <details class="group" open><summary><div class="group__top"><span class="group__num">01</span><span class="group__tag">Основное направление</span></div><h3>Страхи, тревога, панические атаки</h3></summary>
-        <ul><li>Тревожность, страхи, фобии, панические атаки</li><li>Сверхнастороженность</li><li>Навязчивые образы и воспоминания</li><li class="sep">Тревожное (избегающее) расстройство личности</li></ul></details>
-      <details class="group" open><summary><div class="group__top"><span class="group__num">02</span><span class="group__tag">Основное направление</span></div><h3>Личностный рост и уверенность</h3></summary>
-        <ul><li>Болезненная застенчивость или нерешительность</li><li>Неспособность взять на себя ответственность и обязательства</li><li>Сниженная способность чётко формулировать мысли, цели, задачи</li><li>Внутриличностные конфликты</li></ul></details>
-      <details class="group" open><summary><div class="group__top"><span class="group__num">03</span></div><h3>Эмоции и состояние</h3></summary>
-        <ul><li>Обида, вина, стыд</li><li>Злость, гнев</li><li>Резкие перепады настроения</li><li>Состояние гиперактивности: трудно остановиться и расслабиться</li><li>Навязчивые состояния стыда</li><li>Утрата чувства собственного достоинства</li><li>Вялость эмоциональных реакций</li><li>Невротические состояния</li></ul></details>
-      <details class="group" open><summary><div class="group__top"><span class="group__num">04</span></div><h3>Отношения</h3></summary>
-        <ul><li>Любые сложности во взаимоотношениях</li><li>Созависимые отношения</li><li>Выход из треугольника Карпмана</li><li>Отчуждённость, одиночество, изоляция</li><li>Чрезмерная или сниженная сексуальная активность</li></ul></details>
-      <details class="group" open><summary><div class="group__top"><span class="group__num">05</span></div><h3>Утраты и травмы</h3></summary>
-        <ul><li>Утраты (смерть, развод и др.)</li><li>Детские психотравмы у взрослых</li><li>Допроживание незавершённых ситуаций</li></ul></details>
-      <details class="group" open><summary><div class="group__top"><span class="group__num">06</span></div><h3>Сон, усталость, тело</h3></summary>
-        <ul><li>Нарушения сна</li><li>Хроническая усталость</li><li>Психосоматика: головные боли, ЖКТ, кожа, тяжёлый ПМС</li><li>Мигрень</li><li>Болезненная чувствительность к свету и звукам</li></ul></details>
-      <details class="group" open><summary><div class="group__top"><span class="group__num">07</span></div><h3>Пагубные пристрастия и самоповреждение</h3></summary>
-        <ul><li>Переедание</li><li>Пьянство</li><li>Курение</li><li>Самоповреждающее поведение</li></ul></details>
-      <details class="group group--dark" open><summary><div class="group__top"><span class="group__num">08 · Отдельная услуга</span></div><h3>Заключение перед ЭКО</h3></summary>
-        <ul><li><span class="todo" data-cfg="ivfDetails">[уточнить: формат, срок, стоимость]</span></li></ul></details>
+      <article class="group">
+        <div class="group__top"><span class="group__num" aria-hidden="true">01</span><span class="group__tag">Основное направление</span></div>
+        <h3 id="g1"><span class="group__title">Страх и тревога</span><button class="group__toggle" type="button" aria-expanded="true" aria-controls="g1-list">Страх и тревога</button></h3>
+        <ul id="g1-list"><li>Тревога, которая не отпускает, даже когда всё спокойно</li><li>Внезапные приступы паники: колотится сердце, не хватает воздуха</li><li>Страхи, из-за которых приходится избегать мест, дорог или людей</li><li>Постоянное напряжение и ожидание плохого</li><li>Мысли и картинки, от которых не получается отвлечься</li><li>Страх оценки и желание держаться подальше от людей</li></ul>
+      </article>
+      <article class="group">
+        <div class="group__top"><span class="group__num" aria-hidden="true">02</span><span class="group__tag">Основное направление</span></div>
+        <h3 id="g2"><span class="group__title">Уверенность в себе</span><button class="group__toggle" type="button" aria-expanded="true" aria-controls="g2-list">Уверенность в себе</button></h3>
+        <ul id="g2-list"><li>Трудно решиться, сделать выбор или сказать «нет»</li><li>Сложно брать на себя ответственность и держать обещания себе</li><li>Мысли путаются, не получается понять и сформулировать, чего хочется</li><li>Хочется одного, а делаете другое — и спорите сами с собой</li></ul>
+      </article>
+      <article class="group">
+        <div class="group__top"><span class="group__num" aria-hidden="true">03</span></div>
+        <h3 id="g3"><span class="group__title">Эмоции и состояние</span><button class="group__toggle" type="button" aria-expanded="true" aria-controls="g3-list">Эмоции и состояние</button></h3>
+        <ul id="g3-list"><li>Обида, вина или стыд, которые не отпускают</li><li>Злость и раздражение, которые трудно сдерживать</li><li>Настроение резко меняется, и непонятно почему</li><li>Сложно остановиться, расслабиться и побыть в покое</li><li>Ощущение, что вы хуже других и чего-то не достойны</li><li>Будто чувства притупились и ничего не радует</li></ul>
+      </article>
+      <article class="group">
+        <div class="group__top"><span class="group__num" aria-hidden="true">04</span></div>
+        <h3 id="g4"><span class="group__title">Отношения</span><button class="group__toggle" type="button" aria-expanded="true" aria-controls="g4-list">Отношения</button></h3>
+        <ul id="g4-list"><li>Ссоры и непонимание с партнёром, родителями или детьми</li><li>Отношения, в которых вы растворяетесь и теряете себя</li><li>Одни и те же роли: спасать, обижаться, обвинять</li><li>Одиночество — даже когда рядом есть люди</li><li>Сложности в интимной близости</li></ul>
+      </article>
+      <article class="group">
+        <div class="group__top"><span class="group__num" aria-hidden="true">05</span></div>
+        <h3 id="g5"><span class="group__title">Утраты и прошлый опыт</span><button class="group__toggle" type="button" aria-expanded="true" aria-controls="g5-list">Утраты и прошлый опыт</button></h3>
+        <ul id="g5-list"><li>Потеря близкого человека, развод, расставание</li><li>Детский опыт, который до сих пор отзывается во взрослой жизни</li><li>Ситуации, которые не получилось завершить и отпустить</li></ul>
+      </article>
+      <article class="group">
+        <div class="group__top"><span class="group__num" aria-hidden="true">06</span></div>
+        <h3 id="g6"><span class="group__title">Сон, усталость, тело</span><button class="group__toggle" type="button" aria-expanded="true" aria-controls="g6-list">Сон, усталость, тело</button></h3>
+        <ul id="g6-list"><li>Трудно уснуть, или просыпаетесь среди ночи и не можете заснуть снова</li><li>Усталость, которая не проходит даже после отдыха</li><li>Тело откликается на напряжение: головные боли, мигрень, желудок, кожа, тяжёлый ПМС</li><li>Свет и звуки раздражают сильнее, чем раньше</li></ul>
+      </article>
+      <article class="group">
+        <div class="group__top"><span class="group__num" aria-hidden="true">07</span></div>
+        <h3 id="g7"><span class="group__title">Привычки, которые вредят</span><button class="group__toggle" type="button" aria-expanded="true" aria-controls="g7-list">Привычки, которые вредят</button></h3>
+        <ul id="g7-list"><li>Еда стала способом справляться со стрессом</li><li>Алкоголь или сигареты помогают «выдохнуть», но это тревожит</li><li>Бывает желание причинить себе боль</li></ul>
+      </article>
+      <article class="group group--dark">
+        <div class="group__top"><span class="group__num">08 · Отдельная услуга</span></div>
+        <h3 id="g8"><span class="group__title">Заключение перед ЭКО</span><button class="group__toggle" type="button" aria-expanded="true" aria-controls="g8-list">Заключение перед ЭКО</button></h3>
+        <ul id="g8-list"><li><span class="todo" data-cfg="ivfDetails">[уточнить: формат, срок, стоимость]</span></li></ul>
+      </article>
     </div>
   </div>
 </section>
 
 <!-- 5. Как проходит приём -->
-<section id="session">
+<section id="session" aria-labelledby="session-title">
   <div class="wrap">
     <div class="head">
-      <div><p class="overline">Приём</p><h2>Как проходит приём</h2></div>
+      <div><p class="overline">Приём</p><h2 id="session-title">Как проходит приём</h2></div>
       <p class="lead">Встречи — по записи, в кабинете или онлайн.</p>
     </div>
     <div class="steps">
@@ -176,23 +208,17 @@
       <strong>Острые обращения</strong>
       <p>Я принимаю острые обращения и работаю с самоповреждающим поведением — по записи, в часы работы кабинета. Если вам нужна помощь прямо сейчас, звоните <a href="tel:112">112</a>.</p>
     </div>
-    <div class="facts">
-      <span><b>Длительность встречи:</b> <span class="todo" data-cfg="duration">[уточнить]</span></span>
-      <span><b>Часы работы:</b> <span data-cfg="hours">9:00–21:00</span></span>
-    </div>
-    <!-- Цены: выключены до решения Юлии. Флаг showPrices в config.js -->
-    <div class="prices" data-flag="showPrices" hidden>
-      <p class="overline">Стоимость</p>
-      <table><tbody data-cfg-prices></tbody></table>
-    </div>
+    <p class="facts"><span><b>Часы работы:</b> <span data-cfg="hours">9:00–21:00</span></span><span data-show-if="duration" hidden><b>Длительность встречи:</b> <span data-cfg="duration"></span></span></p>
+    <!-- Цены: блок создаётся скриптом, только если в config.js включён showPrices и заполнен prices -->
+    <div data-prices-slot></div>
   </div>
 </section>
 
 <!-- 6. Пространство -->
-<section class="dark" id="space">
+<section class="dark" id="space" aria-labelledby="space-title">
   <div class="wrap">
     <p class="overline">Пространство</p>
-    <h2>Кабинет</h2>
+    <h2 id="space-title">Кабинет</h2>
     <div class="gallery">
       <figure><picture><source type="image/avif" srcset="img/room-armchairs-480.avif 480w, img/room-armchairs-960.avif 960w" sizes="(max-width:900px) 50vw, 25vw"><source type="image/webp" srcset="img/room-armchairs-480.webp 480w, img/room-armchairs-960.webp 960w" sizes="(max-width:900px) 50vw, 25vw"><img src="img/room-armchairs-480.jpg" srcset="img/room-armchairs-480.jpg 480w, img/room-armchairs-960.jpg 960w" sizes="(max-width:900px) 50vw, 25vw" width="480" height="319" alt="Два кресла для встреч у кирпичной стены" loading="lazy"></picture><figcaption>Кресла для встреч</figcaption></figure>
       <figure><picture><source type="image/avif" srcset="img/room-desk-480.avif 480w, img/room-desk-960.avif 960w" sizes="(max-width:900px) 50vw, 25vw"><source type="image/webp" srcset="img/room-desk-480.webp 480w, img/room-desk-960.webp 960w" sizes="(max-width:900px) 50vw, 25vw"><img src="img/room-desk-480.jpg" srcset="img/room-desk-480.jpg 480w, img/room-desk-960.jpg 960w" sizes="(max-width:900px) 50vw, 25vw" width="480" height="319" alt="Рабочий стол с книгами и записями" loading="lazy"></picture><figcaption>Рабочий стол</figcaption></figure>
@@ -203,12 +229,12 @@
 </section>
 
 <!-- 7. Как добраться -->
-<section class="route" id="route">
+<section class="route" id="route" aria-labelledby="route-title">
   <div class="wrap route__grid">
     <div class="reveal">
       <p class="overline">Как добраться</p>
-      <h2>Тула, «Ликёрка»</h2>
-      <p class="lead" style="margin-top:20px" data-cfg="address">Проспект Ленина, 85</p>
+      <h2 id="route-title">Тула, «Ликёрка»</h2>
+      <p class="lead" style="margin-top:20px">Проспект Ленина, 85</p>
       <ol>
         <li><span><b>Парковка</b><span class="todo" data-cfg="routeParking">[уточнить: парковка А / парковка Б]</span></span></li>
         <li><span><b>Шлагбаум и талон</b><span class="todo" data-cfg="routeGate">[уточнить]</span></span></li>
@@ -227,29 +253,25 @@
         </div>
       </div>
       <div class="route__links">
-        <a class="btn btn--dark" data-cfg-href="yandexRoute" href="https://yandex.ru/maps/?text=%D0%A2%D1%83%D0%BB%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%2085" target="_blank" rel="noopener">Маршрут в Яндекс Картах</a>
-        <a class="btn btn--dark" data-cfg-href="gisRoute" href="https://2gis.ru/tula/search/%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%2085" target="_blank" rel="noopener">Открыть в 2ГИС</a>
+        <a class="btn btn--dark" href="https://yandex.ru/maps/?text=%D0%A2%D1%83%D0%BB%D0%B0%2C%20%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%2085" target="_blank" rel="noopener">Маршрут в Яндекс Картах<span class="sr-only"> (откроется в новой вкладке)</span></a>
+        <a class="btn btn--dark" href="https://2gis.ru/tula/search/%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%2085" target="_blank" rel="noopener">Открыть в 2ГИС<span class="sr-only"> (откроется в новой вкладке)</span></a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- 8. Контакты -->
-<section class="dark contacts" id="contacts">
+<section class="dark contacts" id="contacts" aria-labelledby="contacts-title">
   <div class="wrap">
     <div class="contacts__grid">
       <div class="reveal">
         <p class="overline">Запись</p>
-        <h2>Как записаться</h2>
+        <h2 id="contacts-title">Как записаться</h2>
         <hr class="rule">
         <p style="color:var(--cream)">Чтобы записаться, напишите мне в мессенджер или позвоните. Я предложу время — очно в кабинете или онлайн.</p>
-        <div class="btns">
-          <a class="btn btn--gold" data-contact="telegram" href="#contacts">Написать в Telegram</a>
-          <a class="btn btn--dark" data-contact="whatsapp" href="#contacts">WhatsApp</a>
-          <a class="btn btn--dark" data-contact="max" href="#contacts">Max</a>
-          <a class="btn btn--dark" data-contact="phone" href="#contacts">Позвонить</a>
-        </div>
-        <p class="small" style="margin-top:14px" data-contact-note><span class="todo">[уточнить: рабочий номер и ссылки на мессенджеры]</span></p>
+        <!-- Кнопки появляются только для заполненных в config.js каналов -->
+        <div class="btns" data-contact-list></div>
+        <p class="contact-wait" data-contact-wait>Номер и мессенджеры для записи появятся здесь в ближайшие дни. <span class="todo">[уточнить: рабочий номер и ссылки]</span></p>
       </div>
       <div>
         <dl>
@@ -281,11 +303,11 @@
   </div>
 </footer>
 
-<div class="cookie" id="cookie" role="dialog" aria-live="polite" aria-label="Согласие на cookie" hidden>
-  <p>Сайт использует cookie, чтобы работать корректно. Аналитику мы включаем только с вашего согласия. Подробнее — в <a href="privacy.html">политике обработки персональных данных</a>.</p>
-  <div class="btns">
-    <button class="btn btn--gold" type="button" data-cookie="accept">Согласен</button>
-    <button class="btn btn--dark" type="button" data-cookie="decline">Только необходимые</button>
+<div class="cookie" id="cookie" role="region" aria-label="Согласие на cookie" hidden>
+  <p>Cookie для аналитики — только с вашего согласия. <a href="privacy.html">Подробнее</a></p>
+  <div class="cookie__btns">
+    <button class="btn btn--gold btn--sm" type="button" data-cookie="accept">Согласен</button>
+    <button class="btn btn--dark btn--sm" type="button" data-cookie="decline">Только необходимые</button>
   </div>
 </div>
 
