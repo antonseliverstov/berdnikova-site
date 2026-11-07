@@ -76,7 +76,7 @@ def gallery(R, n=None):
     return '<div class="gallery">' + ''.join(out) + '</div>'
 
 # ---------- Общие куски ----------
-NAV = [('about/', 'О Юлии'), ('requests/', 'С чем работаю'), ('services/', 'Форматы и стоимость'),
+NAV = [('about/', 'Обо мне'), ('requests/', 'С чем я работаю'), ('services/', 'Форматы и стоимость'),
        ('first-session/', 'Как проходит приём'), ('office-tula/', 'Кабинет в Туле')]
 LOCKUP = ('<span class="lockup__prof" aria-hidden="true">клинический психолог · Тула</span>'
           '<span class="lockup__name" aria-hidden="true">Юлия Бердникова</span>'
@@ -239,7 +239,7 @@ def trust(R):
              '<li><span class="trust__value">Клинический психолог</span><span class="trust__label">консультации взрослых от 18 лет</span></li>',
              '<li><span class="trust__value">Очно и онлайн</span><span class="trust__label">кабинет в Туле и видеосвязь</span></li>']
     if D.get('showAward'):
-        items.append(f'<li><span class="trust__value">ПроДокторов 2026</span><span class="trust__label">3-е место в категории «Психолог» · <a href="{E(D["prodoctorovUrl"])}" target="_blank" rel="noopener">источник{NEWTAB}</a></span></li>')
+        items.append(f'<li><span class="trust__value">Премия ПроДокторов 2026</span><span class="trust__label">3-е место · категория «Психолог» · <a href="{E(D["prodoctorovUrl"])}" target="_blank" rel="noopener">источник{NEWTAB}</a></span></li>')
     return '<ul class="trust" aria-label="Коротко обо мне">' + ''.join(items) + '</ul>'
 
 FORMATS = [('В кабинете в Туле', 'Проспект Ленина, 85, «Ликёрка». Спокойное пространство с диваном, креслами и светом из окна.', 'office-tula/'),
@@ -285,9 +285,9 @@ built = []
 # Главная
 hero = f'''<section class="hero" aria-labelledby="h1"><div class="wrap hero__grid"><div>
   <p class="overline">Частная практика · Тула и онлайн</p>
-  <h1 id="h1">Юлия Бердникова — клинический психолог в&nbsp;Туле и&nbsp;онлайн</h1>
-  <p class="lead">16 лет практики. Работаю со страхами, тревогой, паническими атаками, сложностями в отношениях и эмоциональным состоянием.</p>
-  <div class="btns">{cta_main('{R}')}<a class="btn {'btn--dark' if HAS_CONTACT else 'btn--gold'}" href="{{R}}services/">Выбрать формат</a></div>
+  <h1 id="h1">Когда тревога, страхи или панические атаки мешают жить, можно начать с&nbsp;разговора</h1>
+  <p class="lead">Меня зовут Юлия Бердникова. Я клинический психолог, 16&nbsp;лет работаю со взрослыми. Принимаю очно в&nbsp;Туле и&nbsp;онлайн.</p>
+  <div class="btns">{cta_main('{R}')}<a class="btn {'btn--dark' if HAS_CONTACT else 'btn--gold'}" href="{{R}}first-session/">Как проходит первая встреча</a></div>
 </div><div class="hero__photo">{pic('{R}', 'portrait-hero', 3788, 5694, 'Юлия Бердникова в кабинете, сидит в кресле на фоне графитовых штор', '(max-width:900px) 100vw, 40vw', lazy=False)}</div></div>
 <div class="wrap">{trust('{R}')}</div></section>'''
 rep = ''
@@ -298,7 +298,7 @@ home = hero + \
   section('formats', 'Форматы встреч', formats('{R}'), 'Формат', '', 'Встречи — по предварительной записи.') + \
   section('first', 'Как проходит первая встреча', first('{R}') + '<p class="more"><a href="{R}first-session/">Подробнее о первой встрече</a></p>', 'Первая встреча', 'white', 'Я не обещаю результат или число встреч заранее — это зависит от вашей ситуации.') + \
   f'''<section id="about" aria-labelledby="about-t"><div class="wrap about__grid"><div class="about__photo">{pic('{R}', 'portrait-about', 3759, 5650, 'Портрет Юлии Бердниковой в кабинете', '(max-width:900px) 100vw, 35vw')}</div><div>
-  <p class="overline">Обо мне</p><h2 id="about-t">Клинический психолог, 16 лет практики</h2><hr class="rule">
+  <p class="overline">Обо мне</p><h2 id="about-t">Мой опыт и подходы</h2><hr class="rule">
   <p>Я принимаю взрослых очно в своём кабинете в Туле и онлайн — в том числе тех, кто живёт в другом городе. Работаю безоценочно и в вашем темпе.</p>
   {methods_block()}<p class="more"><a href="{{R}}about/">Подробнее обо мне</a></p></div></div></section>''' + \
   f'<section class="dark" id="space" aria-labelledby="space-t"><div class="wrap"><p class="overline">Кабинет</p><h2 id="space-t">Кабинет в «Ликёрке»</h2><p class="lead on-dark">Тула, проспект Ленина, 85. Здесь проходят очные встречи.</p>{gallery("{R}", 6)}<p class="more on-dark"><a href="{{R}}office-tula/">Как добраться и все фото кабинета</a></p></div></section>' + \
@@ -307,9 +307,9 @@ home = hero + \
 built.append(page('', 'Клинический психолог в Туле и онлайн — Юлия Бердникова',
      'Юлия Бердникова — клинический психолог, 16 лет практики. Тревога, страхи, панические атаки, отношения, эмоциональное состояние. Очно в Туле («Ликёрка») и онлайн. Посмотрите форматы и условия приёма.', home))
 
-# О Юлии
-about = crumbs('{R}', [(None, 'О Юлии')]) + f'''<section class="page-hero"><div class="wrap about__grid"><div class="about__photo">{pic('{R}', 'portrait-about', 3759, 5650, 'Портрет Юлии Бердниковой в кабинете', '(max-width:900px) 100vw, 35vw', lazy=False)}</div><div>
-<h1>О Юлии Бердниковой</h1><hr class="rule">
+# Обо мне
+about = crumbs('{R}', [(None, 'Обо мне')]) + f'''<section class="page-hero"><div class="wrap about__grid"><div class="about__photo">{pic('{R}', 'portrait-about', 3759, 5650, 'Портрет Юлии Бердниковой в кабинете', '(max-width:900px) 100vw, 35vw', lazy=False)}</div><div>
+<h1>Обо мне</h1><hr class="rule">
 <p class="lead">Я клинический психолог, практикую 16 лет. Принимаю взрослых от 18 лет — очно в своём кабинете в Туле и онлайн.</p>
 <p>Ко мне приходят с разным: со страхами и паническими атаками, с бессонницей, со сложностями в отношениях, с ощущением, что потерялись. Вместе мы разбираемся, что стоит за этим состоянием, — в вашем темпе.</p>
 <h2 class="h-sub mt">Как я работаю</h2><ul class="principles"><li><h3>Без оценок</h3><p>Здесь можно говорить о чём угодно — без осуждения.</p></li><li><h3>Без давления</h3><p>Решение о продолжении встреч всегда за вами.</p></li><li><h3>Бережно к трудным темам</h3><p>Я работаю с острыми состояниями и самоповреждающим поведением — по записи.</p></li></ul>
@@ -318,11 +318,11 @@ about = crumbs('{R}', [(None, 'О Юлии')]) + f'''<section class="page-hero">
 {(f'<p class="more"><a href="{E(D["prodoctorovUrl"])}" target="_blank" rel="noopener">Профиль на ПроДокторов{NEWTAB}</a></p>') if D.get('showReputation') else ''}
 <div class="btns">{cta_main('{R}')}<a class="btn btn--dark" href="{{R}}requests/">С чем я работаю</a></div>
 </div></div></section>''' + booking_cta()
-built.append(page('about/', 'О Юлии Бердниковой — клинический психолог в Туле', 'Юлия Бердникова, клинический психолог, 16 лет практики. Принимает взрослых очно в Туле и онлайн. Принципы работы и подходы.', about, 'about/'))
+built.append(page('about/', 'О Юлии Бердниковой — клинический психолог в Туле', 'Я Юлия Бердникова, клинический психолог, 16 лет практики. Принимаю взрослых очно в Туле и онлайн. Как я работаю и на какие подходы опираюсь.', about, 'about/'))
 
 # Запросы — хаб
 others = ''.join(f'<article class="rcard rcard--plain"><h3>{t}</h3><ul>' + ''.join(f'<li>{x}</li>' for x in items) + '</ul></article>' for t, items in OTHER_GROUPS)
-hub = crumbs('{R}', [(None, 'С чем работаю')]) + f'''<section class="page-hero"><div class="wrap"><h1>С чем ко мне приходят</h1><p class="lead">Не нужно знать, как называется ваше состояние. Здесь — частые переживания, с которыми ко мне обращаются. Если вашего нет в списке, всё равно можно написать.</p></div></section>
+hub = crumbs('{R}', [(None, 'С чем я работаю')]) + f'''<section class="page-hero"><div class="wrap"><h1>С чем ко мне приходят</h1><p class="lead">Не нужно знать, как называется ваше состояние. Здесь — частые переживания, с которыми ко мне обращаются. Если вашего нет в списке, всё равно можно написать.</p></div></section>
 <section class="white" aria-labelledby="hub-main"><div class="wrap"><h2 id="hub-main" class="h-sub">Подробно по темам</h2><div class="rgrid">{''.join(reqcard('{R}', r) for r in REQUESTS)}<article class="rcard"><h3><a href="{{R}}online/">Психолог онлайн</a></h3><p>Если вы в другом городе или вам удобнее встречаться из дома.</p></article></div></div></section>
 <section aria-labelledby="hub-other"><div class="wrap"><h2 id="hub-other" class="h-sub">Также приходят с этим</h2><div class="rgrid rgrid--2">{others}</div>
 {'<div class="rcard rcard--dark"><h3>Заключение перед ЭКО</h3><p>' + E(D['ivf']) + '</p></div>' if D.get('ivf') else ''}
@@ -333,7 +333,7 @@ built.append(page('requests/', 'С чем работает психолог Юл
 BY = {r['slug']: r for r in REQUESTS}
 for r in REQUESTS:
     rel = ''.join(reqcard('{R}', BY[s]) for s in r['related']) + '<article class="rcard"><h3><a href="{R}online/">Психолог онлайн</a></h3><p>Встречи по видеосвязи.</p></article>'
-    body = crumbs('{R}', [('requests/', 'С чем работаю'), (None, r['card'])]) + f'''<section class="page-hero"><div class="wrap narrow"><h1>{r['h1']}</h1><p class="lead">{r['intro']}</p>
+    body = crumbs('{R}', [('requests/', 'С чем я работаю'), (None, r['card'])]) + f'''<section class="page-hero"><div class="wrap narrow"><h1>{r['h1']}</h1><p class="lead">{r['intro']}</p>
 <div class="btns">{cta_main('{R}')}<a class="btn btn--dark" href="{{R}}services/">Форматы и стоимость</a></div></div></section>
 {('<div class="wrap narrow urgent-top">' + URGENT + '</div>') if r.get('urgent') else ''}
 <section class="white" aria-labelledby="d-t"><div class="wrap narrow"><h2 id="d-t">Что можно обсудить</h2><ul class="ticks">{''.join(f'<li>{x}</li>' for x in r['discuss'])}</ul></div></section>

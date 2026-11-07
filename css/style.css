@@ -113,14 +113,14 @@ p{margin:0 0 16px;max-width:680px}
 /* Первый экран и шапки страниц */
 .hero{padding:72px 0 96px}
 .hero__grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:64px;align-items:center}
-.hero h1{font-size:72px;line-height:1.02;margin-bottom:28px}
+.hero h1{font-size:58px;line-height:1.05;margin-bottom:28px;text-wrap:balance}
 .hero__photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 18%;border-radius:var(--radius)}
 .page-hero{padding:48px 0 88px}
 .page-hero h1{font-size:72px;line-height:1.02;margin-bottom:24px}
 .narrow{max-width:calc(820px + 2*var(--gutter))}
 .urgent-top{padding-bottom:32px}
 @media (max-width:900px){.hero{padding:32px 0 64px}.hero__grid{grid-template-columns:1fr;gap:32px}.hero__photo{order:-1}.hero__photo img{max-height:460px}
-  .hero h1,.page-hero h1{font-size:44px;line-height:1.08}.page-hero{padding:32px 0 56px}}
+  .hero h1{font-size:36px;line-height:1.1}.page-hero h1{font-size:44px;line-height:1.08}.page-hero{padding:32px 0 56px}}
 
 /* Блок доверия */
 .trust{list-style:none;margin:64px 0 0;padding:28px 0 0;border-top:1px solid var(--linen);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px 40px}
