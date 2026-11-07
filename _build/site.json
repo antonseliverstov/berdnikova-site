@@ -1,0 +1,44 @@
+{
+  "_help": "Данные сайта. После правки запустите: python _build/build.py — HTML пересоберётся. null или false = сведений нет, блок не публикуется.",
+
+  "phone": null,
+  "telegram": null,
+  "whatsapp": null,
+  "max": null,
+  "primary": "telegram",
+  "messageText": "Здравствуйте! Хочу записаться на консультацию.",
+
+  "days": null,
+  "hours": "9:00–21:00",
+  "placeDetails": null,
+  "route": null,
+  "yandexMapUrl": null,
+  "gisMapUrl": null,
+  "routePhotos": false,
+
+  "prices": [],
+  "duration": null,
+  "payment": null,
+  "cancellation": null,
+  "ivf": null,
+
+  "showMethods": false,
+  "methods": [
+    ["Когнитивно-поведенческий подход", "Помогает заметить мысли и привычные реакции, которые поддерживают тревогу, и постепенно пробовать действовать иначе."],
+    ["Экзистенциально-гуманистический подход", "Внимание к вашим ценностям, выборам и тому, что для вас по-настоящему важно."],
+    ["Транзактный анализ", "Помогает увидеть повторяющиеся сценарии и роли в отношениях — и то, откуда они берутся."],
+    ["Нейролингвистическое программирование", "Формулировку согласовать с Юлией."]
+  ],
+  "education": [],
+
+  "showReputation": false,
+  "prodoctorovUrl": "https://prodoctorov.ru/tula/vrach/841357-berdnikova/",
+  "prodoctorovRating": "4,7",
+  "prodoctorovReviews": "32 отзыва",
+  "prodoctorovChecked": "04.11.2026",
+  "showAward": false,
+
+  "legal": null,
+  "domain": null,
+  "metrikaId": null
+}

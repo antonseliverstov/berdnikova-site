@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Замените ДОМЕН на адрес сайта после регистрации -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://ДОМЕН/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://ДОМЕН/</loc></url>
+  <url><loc>https://ДОМЕН/about/</loc></url>
+  <url><loc>https://ДОМЕН/requests/</loc></url>
+  <url><loc>https://ДОМЕН/requests/anxiety/</loc></url>
+  <url><loc>https://ДОМЕН/requests/relationships/</loc></url>
+  <url><loc>https://ДОМЕН/requests/grief/</loc></url>
+  <url><loc>https://ДОМЕН/requests/self-harm/</loc></url>
+  <url><loc>https://ДОМЕН/online/</loc></url>
+  <url><loc>https://ДОМЕН/services/</loc></url>
+  <url><loc>https://ДОМЕН/first-session/</loc></url>
+  <url><loc>https://ДОМЕН/office-tula/</loc></url>
+  <url><loc>https://ДОМЕН/faq/</loc></url>
+  <url><loc>https://ДОМЕН/booking/</loc></url>
 </urlset>
