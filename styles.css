@@ -334,3 +334,44 @@ html{scroll-padding-top:calc(var(--nav-h) + 16px)}
   .service-card-wide{grid-template-columns:1fr;min-height:0}
   .service-visual{display:none}
 }
+
+/* Юридические сведения в подвале, подпись к записи, баннер cookie и страницы документов (2026-11-20). */
+.footer-legal{margin-top:56px;padding-top:28px;border-top:1px solid var(--taupe);display:grid;gap:10px;font-size:13px;line-height:1.55;color:#6f6455}
+.footer-legal p{margin:0;max-width:880px}
+.footer-requisites{color:var(--graphite);font-weight:600}
+.footer-docs{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:6px}
+.footer-docs a{text-decoration:underline;text-underline-offset:3px;color:var(--graphite)}
+.footer-legal+.footer-bottom{margin-top:24px}
+.footer-bottom{gap:10px 32px}
+.booking-foot p.booking-legal{display:block;flex:1 1 100%;order:3;font-size:12px;color:#6f6455}
+.booking-legal a{text-decoration:underline;text-underline-offset:2px}
+
+.pb-cookie{position:fixed;z-index:80;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:760px;margin-inline:auto;background:var(--graphite);color:var(--cream);border-radius:20px;padding:16px 18px;display:flex;gap:12px 18px;align-items:center;flex-wrap:wrap;box-shadow:0 14px 40px rgba(23,23,19,.28);font-size:14px;line-height:1.45}
+.pb-cookie[hidden]{display:none!important}
+.pb-cookie p{flex:1 1 320px;margin:0}
+.pb-cookie a{color:var(--cream);text-decoration:underline;text-underline-offset:2px}
+.pb-cookie button{min-height:44px;padding:0 24px;border-radius:999px;border:0;background:var(--cream);color:var(--graphite);font-weight:600;cursor:pointer}
+.pb-cookie button:focus-visible{outline:2px solid var(--sand);outline-offset:3px}
+
+.legal-page{background:var(--white)}
+.legal-top{border-bottom:1px solid var(--sand);background:var(--cream)}
+.legal-top .shell{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:80px}
+.legal-brand{font:300 28px/1 "Cormorant Garamond",serif}
+.legal{padding:64px 0 90px}
+.legal .shell{max-width:860px}
+.legal .crumbs{font-size:13px;color:#6f6455;margin:0 0 24px}
+.legal .crumbs a{text-decoration:underline;text-underline-offset:2px}
+.legal h1{font:300 64px/1 "Cormorant Garamond",serif;letter-spacing:-.02em;margin:0 0 20px}
+.legal .lead{font-size:18px;margin:0 0 40px;max-width:720px}
+.legal h2{font:400 32px/1.15 "Cormorant Garamond",serif;margin:48px 0 14px}
+.legal p,.legal li{font-size:16px;line-height:1.65}
+.legal ul{padding-left:22px;margin:0 0 16px}
+.legal li{margin-bottom:6px}
+.legal a{text-decoration:underline;text-underline-offset:3px}
+.legal .table-wrap{overflow-x:auto;margin:8px 0 18px}
+.legal table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.5;min-width:560px}
+.legal th,.legal td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--sand)}
+.legal th{font-weight:600;background:var(--cream)}
+.legal .note{background:var(--cream);border-radius:16px;padding:18px 22px;margin:18px 0}
+.legal .edition{margin-top:48px;color:#6f6455;font-size:14px}
+@media(max-width:760px){.legal{padding:40px 0 64px}.legal h1{font-size:38px;overflow-wrap:anywhere;hyphens:auto}.legal h2{font-size:27px;margin-top:36px}.legal-brand{font-size:22px}.legal-top .button{display:inline-flex;min-height:44px;padding:10px 18px}}
