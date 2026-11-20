@@ -6,6 +6,7 @@
 (function () {
   var METRIKA_ID = ''; // например '12345678'
   var KEY = 'psy-berdnikova-cookie';
+  window.PB_METRIKA = METRIKA_ID; // lead.js отправляет цель «lead» после заявки
 
   function get() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function set(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }

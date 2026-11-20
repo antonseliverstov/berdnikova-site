@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-consent-version="2026-11-20-2">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
     <script src="consent.js" defer></script>
+    <script src="lead.js" defer></script>
   </head>
   <body>
     <header class="hero" id="top">
@@ -61,7 +62,7 @@
           <div class="team-head reveal"><h2>Специалисты Центра<br />Психологии и Развития</h2><p>Я руковожу центром и веду индивидуальные консультации. Вместе со мной в центре работает клинический психолог Ольга Авдашина.</p></div>
           <div class="team-grid">
             <article class="team-card team-card--dark reveal"><img class="team-photo" src="assets/team/yulia-berdnikova.jpg" width="640" height="800" alt="Юлия Бердникова" loading="lazy" /><div class="team-info"><h3>Юлия Юрьевна<br />Бердникова</h3><p>Руководитель центра<br />Клинический психолог</p><a class="team-link" href="https://n2781405.yclients.ru/" target="_blank" rel="noopener" data-booking-open>Записаться к Юлии<span aria-hidden="true"> ↗</span></a></div></article>
-            <article class="team-card team-card--light reveal"><img class="team-photo" src="assets/team/olga-avdashina.jpg" width="255" height="317" alt="Ольга Авдашина" loading="lazy" /><div class="team-info"><h3>Ольга Сергеевна<br />Авдашина</h3><p>Клинический психолог</p><a class="team-link" href="#contacts">Уточнить запись<span aria-hidden="true"> ↗</span></a></div></article>
+            <article class="team-card team-card--light reveal"><img class="team-photo" src="assets/team/olga-avdashina.jpg" width="255" height="317" alt="Ольга Авдашина" loading="lazy" /><div class="team-info"><h3>Ольга Сергеевна<br />Авдашина</h3><p>Клинический психолог</p><a class="team-link" href="#lead-dialog" data-lead-open data-specialist="Ольга Сергеевна Авдашина">Уточнить запись<span aria-hidden="true"> ↗</span></a></div></article>
           </div>
         </div>
       </section>
@@ -161,6 +162,34 @@
           <p>Запись проходит в сервисе YCLIENTS. Если расписание не отображается, откройте его отдельно.</p><p class="booking-legal">Записываясь, вы даёте <a href="consent.html" target="_blank">согласие на обработку персональных данных</a> и подтверждаете, что ознакомились с <a href="privacy.html" target="_blank">политикой конфиденциальности</a>. В записи достаточно имени и телефона — описывать ситуацию не нужно.</p>
           <a class="booking-external" href="https://n2781405.yclients.ru/" target="_blank" rel="noopener">Открыть запись в новой вкладке<span aria-hidden="true"> ↗</span></a>
         </footer>
+      </div>
+    </dialog>
+    <dialog class="booking-dialog lead-dialog" id="lead-dialog" aria-labelledby="lead-title">
+      <div class="booking-panel">
+        <header class="booking-head">
+          <div><p class="eyebrow">Заявка на консультацию</p><h2 id="lead-title">Запись к Ольге Авдашиной</h2></div>
+          <button class="booking-close" type="button" aria-label="Закрыть заявку" data-lead-close>×</button>
+        </header>
+        <div class="lead-body">
+          <form class="lead-form" id="lead-form" novalidate>
+            <p class="lead-intro">Оставьте имя и телефон — мы перезвоним и согласуем удобное время консультации. Описывать ситуацию не нужно.</p>
+            <input type="hidden" name="specialist" value="" />
+            <label class="lead-field"><span>Имя</span><input name="name" type="text" autocomplete="given-name" maxlength="80" required /></label>
+            <label class="lead-field"><span>Телефон</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" maxlength="18" required /></label>
+            <label class="lead-trap" aria-hidden="true">Сайт<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+            <div class="lead-checks">
+              <label class="lead-check"><input type="checkbox" name="privacy" required /><span>Ознакомлен(а) с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
+              <label class="lead-check"><input type="checkbox" name="consent" required /><span>Даю <a href="consent.html" target="_blank">согласие на обработку персональных данных</a></span></label>
+            </div>
+            <p class="lead-error" role="alert" hidden></p>
+            <button class="button lead-submit" type="submit">Отправить заявку</button>
+          </form>
+          <div class="lead-done" hidden>
+            <h3>Спасибо, заявка отправлена</h3>
+            <p>Мы перезвоним в ближайшее время, чтобы согласовать время консультации.</p>
+            <button class="button" type="button" data-lead-close>Закрыть</button>
+          </div>
+        </div>
       </div>
     </dialog>
   </body>
