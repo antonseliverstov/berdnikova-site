@@ -375,3 +375,22 @@ html{scroll-padding-top:calc(var(--nav-h) + 16px)}
 .legal .note{background:var(--cream);border-radius:16px;padding:18px 22px;margin:18px 0}
 .legal .edition{margin-top:48px;color:#6f6455;font-size:14px}
 @media(max-width:760px){.legal{padding:40px 0 64px}.legal h1{font-size:38px;overflow-wrap:anywhere;hyphens:auto}.legal h2{font-size:27px;margin-top:36px}.legal-brand{font-size:22px}.legal-top .button{display:inline-flex;min-height:44px;padding:10px 18px}}
+
+/* Специалисты центра (2026-11-20, по референсу) */
+.team{background:var(--cream)}
+.team-head{display:grid;grid-template-columns:1.5fr 1fr;gap:64px;align-items:center;margin-bottom:56px}
+.team-head p{font-size:16px;max-width:410px;margin:0}
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.team-card{display:grid;grid-template-columns:255px 1fr;gap:28px;padding:14px;border-radius:var(--radius);min-height:346px}
+.team-card--dark{background:var(--olive);color:var(--cream)}
+.team-card--light{background:var(--white);color:var(--graphite);border:1px solid var(--sand)}
+.team-photo{width:255px;height:317px;object-fit:cover;object-position:center top;border-radius:128px 128px 18px 18px}
+.team-info{display:flex;flex-direction:column;align-items:flex-start;padding:30px 14px 14px 0}
+.team-info h3{font:300 38px/1.12 "Cormorant Garamond",serif;margin:0 0 36px}
+.team-info p{font-size:14px;line-height:1.8;margin:0}
+.team-link{margin-top:auto;font-size:14px;font-weight:600;border-bottom:1px solid currentColor;padding-bottom:6px}
+.team-link:hover{opacity:.8}
+.team-link:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+@media(max-width:1200px){.team-card{grid-template-columns:200px 1fr}.team-photo{width:200px;height:250px;border-radius:100px 100px 16px 16px}.team-info h3{font-size:32px}}
+@media(max-width:1050px){.team-head{grid-template-columns:1fr;gap:24px}.team-grid{grid-template-columns:1fr}.team-card{grid-template-columns:255px 1fr}.team-photo{width:255px;height:317px;border-radius:128px 128px 18px 18px}}
+@media(max-width:760px){.team-head{margin-bottom:36px}.team-card{grid-template-columns:1fr;gap:0}.team-photo{width:100%;height:auto;aspect-ratio:4/5;max-height:420px;border-radius:999px 999px 18px 18px}.team-info{padding:24px 10px 12px}.team-info h3{font-size:34px;margin-bottom:16px}.team-link{margin-top:24px}}
