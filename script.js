@@ -166,12 +166,6 @@ const educationDocuments = [
 ];
 
 const educationSection = document.querySelector('#education');
-const documentImage = document.querySelector('#document-image');
-const documentTitle = document.querySelector('#document-title');
-const documentKind = document.querySelector('#document-kind');
-const documentMeta = document.querySelector('#document-meta');
-const documentPosition = document.querySelector('#document-position');
-const documentPreview = document.querySelector('#document-preview');
 const documentModal = document.querySelector('#document-modal');
 const documentModalImage = document.querySelector('#document-modal-image');
 const documentModalTitle = document.querySelector('#document-modal-title');
@@ -182,32 +176,10 @@ let currentDocument = 0;
 let documentZoom = 1;
 let documentFitWidth = 0;
 
+// Current document for the zoom window; the window keeps its own prev/next through all 6 documents.
 function updateDocument(index, resetModalZoom = true) {
   currentDocument = (index + educationDocuments.length) % educationDocuments.length;
   const documentData = educationDocuments[currentDocument];
-  documentImage.src = documentData.src;
-  documentImage.alt = documentData.alt;
-  documentTitle.textContent = documentData.title;
-  documentKind.textContent = documentData.kind;
-  documentMeta.textContent = documentData.meta;
-  documentPosition.textContent = `${currentDocument + 1} из ${educationDocuments.length}`;
-  documentPreview.setAttribute('aria-label', `Открыть увеличенный документ: ${documentData.title}`);
-
-  educationSection?.querySelectorAll('[data-program]').forEach((tab) => {
-    const isActive = Number(tab.dataset.program) === documentData.qualification;
-    tab.classList.toggle('active', isActive);
-    tab.setAttribute('aria-pressed', String(isActive));
-    if (isActive) revealEducationTab(tab);
-  });
-  educationSection?.querySelectorAll('[data-program-panel]').forEach((panel) => {
-    panel.hidden = Number(panel.dataset.programPanel) !== documentData.qualification;
-  });
-  educationSection?.querySelectorAll('[data-document]').forEach((button) => {
-    const isActive = Number(button.dataset.document) === currentDocument;
-    button.classList.toggle('active', isActive);
-    if (button.closest('.document-switches')) button.setAttribute('aria-pressed', String(isActive));
-  });
-
   if (documentModal?.open) {
     documentModalImage.src = documentData.src;
     documentModalImage.alt = documentData.alt;
@@ -215,36 +187,142 @@ function updateDocument(index, resetModalZoom = true) {
     documentModalPosition.textContent = `${currentDocument + 1} из ${educationDocuments.length}`;
     if (resetModalZoom) documentModalImage.addEventListener('load', fitModalDocument, { once: true });
   }
-
   [currentDocument - 1, currentDocument + 1].forEach((neighbor) => {
     const preload = new Image();
     preload.src = educationDocuments[(neighbor + educationDocuments.length) % educationDocuments.length].src;
   });
 }
 
-// Keeps the active program button visible inside the (mobile) horizontally scrolling bar
-// without scrolling the page itself.
+// Education carousel: one card per program, endless, neighbours peek at both edges,
+// chips above follow the centred card. A clone of the last card sits before the first and vice versa.
+const eduTrack = educationSection?.querySelector('.edu-track');
+const eduReal = eduTrack ? [...eduTrack.querySelectorAll('.edu-card')] : [];
+const eduChips = educationSection ? [...educationSection.querySelectorAll('[data-edu-go]')] : [];
+const eduCount = eduReal.length;
+let eduSlides = [];
+let eduCurrent = 0;      // real index 0..count-1
+let eduPhysical = 1;     // index in eduSlides (0 and count+1 are clones)
+let eduScrollTimer;
+const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function eduLeft(physical) {
+  const card = eduSlides[physical];
+  return card.offsetLeft - (eduTrack.clientWidth - card.offsetWidth) / 2;
+}
+function eduMark(physical) {
+  eduPhysical = physical;
+  eduCurrent = (physical - 1 + eduCount) % eduCount;
+  eduSlides.forEach((card, i) => card.classList.toggle('is-active', i === physical));
+  eduChips.forEach((chip, i) => {
+    const active = i === eduCurrent;
+    chip.classList.toggle('active', active);
+    chip.setAttribute('aria-selected', String(active));
+    chip.tabIndex = active ? 0 : -1;
+    if (active) revealEducationTab(chip);
+  });
+}
+function eduJump(physical) {
+  eduTrack.style.scrollSnapType = 'none';
+  eduTrack.scrollLeft = eduLeft(physical);
+  eduMark(physical);
+  requestAnimationFrame(() => { eduTrack.style.scrollSnapType = ''; });
+}
+function eduScrollTo(physical, smooth = true) {
+  eduMark(physical);
+  eduTrack.scrollTo({ left: eduLeft(physical), behavior: smooth && !reduceMotion() ? 'smooth' : 'auto' });
+}
+function eduGo(realIndex, smooth = true) {
+  if (!eduCount) return;
+  eduScrollTo(((realIndex % eduCount) + eduCount) % eduCount + 1, smooth);
+}
+function eduStep(direction) {
+  if (!eduCount) return;
+  eduScrollTo(Math.max(0, Math.min(eduCount + 1, eduPhysical + direction)));
+}
+function eduNearest() {
+  const centre = eduTrack.scrollLeft + eduTrack.clientWidth / 2;
+  let best = 1; let bestDistance = Infinity;
+  eduSlides.forEach((card, i) => {
+    const distance = Math.abs(card.offsetLeft + card.offsetWidth / 2 - centre);
+    if (distance < bestDistance) { bestDistance = distance; best = i; }
+  });
+  return best;
+}
+
+// Keeps the active chip visible inside the (mobile) horizontally scrolling bar without scrolling the page itself.
 function revealEducationTab(tab) {
   const bar = tab.parentElement;
   if (!bar || bar.scrollWidth <= bar.clientWidth) return;
   const left = tab.offsetLeft - bar.offsetLeft;
   const right = left + tab.offsetWidth;
   if (left < bar.scrollLeft || right > bar.scrollLeft + bar.clientWidth) {
-    bar.scrollTo({ left: Math.max(0, left - 16), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    bar.scrollTo({ left: Math.max(0, left - 16), behavior: reduceMotion() ? 'auto' : 'smooth' });
   }
 }
 
-educationSection?.querySelectorAll('[data-program]').forEach((tab) => {
-  tab.addEventListener('click', () => {
-    const first = educationDocuments.findIndex((item) => item.qualification === Number(tab.dataset.program));
-    if (first >= 0) updateDocument(first);
+if (eduTrack && eduCount > 1) {
+  const makeClone = (card) => {
+    const clone = card.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.removeAttribute('role');
+    clone.removeAttribute('aria-labelledby');
+    clone.setAttribute('aria-hidden', 'true');
+    clone.classList.add('is-clone');
+    clone.querySelectorAll('button').forEach((button) => button.setAttribute('tabindex', '-1'));
+    return clone;
+  };
+  eduTrack.prepend(makeClone(eduReal[eduCount - 1]));
+  eduTrack.append(makeClone(eduReal[0]));
+  eduSlides = [...eduTrack.querySelectorAll('.edu-card')];
+
+  eduChips.forEach((chip) => chip.addEventListener('click', () => eduGo(Number(chip.dataset.eduGo))));
+  educationSection.querySelector('.edu-chips')?.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    eduGo(eduCurrent + (event.key === 'ArrowRight' ? 1 : -1));
+    eduChips[eduCurrent].focus();
+  });
+  educationSection.querySelectorAll('[data-edu-step]').forEach((button) => {
+    button.addEventListener('click', () => eduStep(Number(button.dataset.eduStep)));
+  });
+  eduTrack.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); eduStep(-1); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); eduStep(1); }
+  });
+  // A click on a peeking neighbour brings it to the centre instead of opening its document.
+  eduSlides.forEach((card, i) => {
+    card.addEventListener('click', (event) => {
+      if (i === eduPhysical) return;
+      event.preventDefault();
+      event.stopPropagation();
+      eduScrollTo(i);
+    }, true);
+  });
+  eduTrack.addEventListener('scroll', () => {
+    clearTimeout(eduScrollTimer);
+    eduScrollTimer = setTimeout(() => {
+      const nearest = eduNearest();
+      if (nearest === 0) eduJump(eduCount);
+      else if (nearest === eduCount + 1) eduJump(1);
+      else if (nearest !== eduPhysical) eduMark(nearest);
+    }, 120);
+  }, { passive: true });
+  window.addEventListener('resize', () => eduJump(eduPhysical));
+  eduMark(1);
+  requestAnimationFrame(() => eduJump(1));
+}
+
+educationSection?.querySelectorAll('[data-open-doc]').forEach((button) => {
+  button.addEventListener('click', () => {
+    updateDocument(Number(button.dataset.openDoc));
+    openDocumentModal();
   });
 });
-educationSection?.querySelectorAll('[data-document]').forEach((button) => {
-  button.addEventListener('click', () => updateDocument(Number(button.dataset.document)));
+// After browsing documents in the zoom window, the carousel shows the program of the last one.
+documentModal?.addEventListener('close', () => {
+  const program = educationDocuments[currentDocument]?.qualification;
+  if (typeof program === 'number' && program !== eduCurrent && eduSlides.length) eduJump(program + 1);
 });
-document.querySelector('#viewer-prev')?.addEventListener('click', () => updateDocument(currentDocument - 1));
-document.querySelector('#viewer-next')?.addEventListener('click', () => updateDocument(currentDocument + 1));
 
 function setDocumentZoom(zoom) {
   documentZoom = Math.min(3, Math.max(1, zoom));
@@ -272,8 +350,6 @@ function openDocumentModal() {
   requestAnimationFrame(fitModalDocument);
 }
 
-documentPreview?.addEventListener('click', openDocumentModal);
-document.querySelector('#viewer-expand')?.addEventListener('click', openDocumentModal);
 document.querySelector('.document-modal-close')?.addEventListener('click', () => documentModal.close());
 document.querySelector('#document-zoom-in')?.addEventListener('click', () => setDocumentZoom(documentZoom + 0.25));
 document.querySelector('#document-zoom-out')?.addEventListener('click', () => setDocumentZoom(documentZoom - 0.25));
