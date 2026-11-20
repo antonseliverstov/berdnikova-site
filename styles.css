@@ -418,3 +418,4 @@ html{scroll-padding-top:calc(var(--nav-h) + 16px)}
 .lead-dialog .booking-panel{grid-template-rows:auto minmax(0,1fr)}
 .lead-form[hidden],.lead-done[hidden],.lead-error[hidden]{display:none!important}
 .team-head{grid-template-columns:1fr}
+@media(max-width:1050px) and (min-width:761px){.photo-extra{grid-column:span 2}}
