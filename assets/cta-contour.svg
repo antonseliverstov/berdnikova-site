@@ -1,0 +1,6 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="548" height="776" viewBox="0 0 548 776" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="stroke0_0_103" fill="white">
+<path d="M548 388C548 602.286 425.326 776 274 776C122.674 776 0 602.286 0 388C0 173.714 122.674 0 274 0C425.326 0 548 173.714 548 388Z"/>
+</mask>
+<ellipse id="CTA / Fine contour" cx="274" cy="388" rx="274" ry="388" stroke-width="2" stroke="#FFF1CF" mask="url(#stroke0_0_103)"/>
+</svg>

@@ -1,0 +1,6 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="460" height="650" viewBox="0 0 460 650" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="stroke0_0_102" fill="white">
+<path d="M460 325C460 504.493 357.025 650 230 650C102.975 650 0 504.493 0 325C0 145.507 102.975 0 230 0C357.025 0 460 145.507 460 325Z"/>
+</mask>
+<ellipse id="Motion / Float / Portrait contour" cx="230" cy="325" rx="230" ry="325" stroke-width="2" stroke="#FFF1CF" mask="url(#stroke0_0_102)"/>
+</svg>
