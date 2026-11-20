@@ -468,3 +468,8 @@ html{scroll-padding-top:calc(var(--nav-h) + 16px)}
   .edu-meta{margin-bottom:18px}
   .edu-arrow{display:none}
 }
+/* Стрелки — SVG, а не символы ↗ ← →: на телефонах символы превращаются в системные эмодзи */
+.ico-arrow{display:inline-block;width:.78em;height:.78em;margin-left:.35em;vertical-align:-.02em;flex:none}
+.edu-arrow,#review-prev,#review-next{display:inline-grid;place-items:center}
+.edu-arrow svg,#review-prev svg,#review-next svg{display:block}
+@media(max-width:760px){.edu-arrow{display:none}}
