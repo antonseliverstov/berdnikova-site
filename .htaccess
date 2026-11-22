@@ -2,10 +2,15 @@ AddDefaultCharset utf-8
 
 RewriteEngine On
 # Всё на https://psy-berdnikova.ru без www.
-# На Timeweb https принимает прокси, Apache всегда видит HTTPS=off — смотрим заголовок прокси, иначе будет петля (как на belovet.ru)
-RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^(.*)$ https://psy-berdnikova.ru/$1 [R=301,L]
+# http → https. На этом сервере прокси не присылает X-Forwarded-Proto=http (правило как на belovet.ru не сработало, 23.11.2026),
+# поэтому редиректим всё, что не помечено как https. Защита от петли: редирект ставит техническую cookie pb_https на 2 минуты,
+# и с ней повторного редиректа не будет, даже если сервер не отличит https от http.
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_COOKIE} !pb_https=1
+RewriteRule ^(.*)$ https://psy-berdnikova.ru/$1 [R=301,L,CO=pb_https:1:psy-berdnikova.ru:2]
 # /index.html → / (канонический адрес главной)
 RewriteCond %{THE_REQUEST} \s/index\.html[\s?]
 RewriteRule ^index\.html$ / [R=301,L]
@@ -30,4 +35,6 @@ RewriteRule \.bak - [F,L]
   Header always set Strict-Transport-Security "max-age=31536000"
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Диагностика: какой протокол сообщает прокси (можно убрать, когда редирект проверен)
+  Header always set X-PB-Proto "%{X-Forwarded-Proto}i"
 </IfModule>
