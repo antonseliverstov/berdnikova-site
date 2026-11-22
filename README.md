@@ -20,3 +20,4 @@
 - После правок `styles.css`/скриптов меняйте `?v=ДАТА` в ссылках на них в трёх HTML (сброс кэша браузера у посетителей).
 - `yandex_ab54f7f1b69c7984.html` — подтверждение прав в Яндекс Вебмастере (не удалять). `robots.txt` и `sitemap.xml` — при новых страницах дополнять sitemap.
 - `.htaccess` — перенаправление http/www → https://psy-berdnikova.ru (по X-Forwarded-Proto, как на belovet), сроки кэша, запрет .bak.
+- SEO (23.11.2026): title/description/H1 с Тулой, адрес в подвале, JSON-LD (ProfessionalService, Person, FAQPage), Open Graph (`assets/og-image.jpg`), canonical, `404.html`, favicon (`favicon.ico`, `favicon-120.png`, `apple-touch-icon.png`), картинки запросов и маскоты в WebP.

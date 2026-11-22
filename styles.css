@@ -499,3 +499,25 @@ html{scroll-padding-top:calc(var(--nav-h) + 16px)}
 .team-actions .team-link{margin-top:0}
 button.team-link{appearance:none;background:none;border:0;border-bottom:1px solid currentColor;border-radius:0;padding:0 0 6px;color:inherit;font:600 14px Manrope,Arial,sans-serif;cursor:pointer}
 @media(max-width:760px){.team-actions{margin-top:24px}}
+
+/* SEO-правки 23.11.2026: город в H1 и адрес в контактах */
+.hero h1 .hero-city{display:block;margin-top:22px;font:600 15px/1.2 Manrope,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;white-space:normal;color:var(--olive)}
+.footer-address{font-size:14px;line-height:1.5;margin:0}
+.hero h1 span:nth-child(2){margin-top:12px}
+.hero h1 span.hero-city{margin-top:22px}
+@media(max-width:760px){.hero h1 span.hero-city{font-size:12px;margin-top:14px}}
+.not-found .eyebrow{color:var(--olive);margin:0 0 14px}
+.not-found-actions{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 28px}
+.not-found-actions .button.light{border:1px solid var(--olive)}
+.not-found-contacts{font-size:15px;color:#4d4a40}
+.not-found-contacts a{text-decoration:underline}
+/* Заголовки окон и копий карусели — не заголовки страницы (SEO), вид прежний */
+.booking-head .modal-title{margin:0;font:300 34px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:-.01em}
+.document-modal-toolbar .modal-title{font:300 30px/1 "Cormorant Garamond",serif;margin:0}
+.lead-done .modal-title{margin:0;font:300 34px/1.05 "Cormorant Garamond",serif}
+.edu-info .edu-title{font:300 34px/1.12 "Cormorant Garamond",serif;margin:0 0 14px}
+@media(max-width:1050px){.edu-info .edu-title{font-size:28px}}
+@media(max-width:760px){.booking-head .modal-title{font-size:24px}.edu-info .edu-title{font-size:26px}}
+.footer .footer-name{font-family:"Cormorant Garamond",serif;font-weight:300;letter-spacing:-.02em;line-height:.93;font-size:58px;margin:0 0 18px}
+@media(max-width:760px){.footer .footer-name{font-size:46px}}
+.not-found-actions .button{text-decoration:none}

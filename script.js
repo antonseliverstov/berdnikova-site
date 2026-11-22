@@ -285,6 +285,8 @@ if (eduTrack && eduCount > 1) {
     clone.removeAttribute('aria-labelledby');
     clone.setAttribute('aria-hidden', 'true');
     clone.classList.add('is-clone');
+    // In clones headings become plain text, so the page outline has each program only once
+    clone.querySelectorAll('h3').forEach((h) => { const p = document.createElement('p'); p.className = 'edu-title'; p.innerHTML = h.innerHTML; h.replaceWith(p); });
     clone.querySelectorAll('button').forEach((button) => button.setAttribute('tabindex', '-1'));
     return clone;
   };
