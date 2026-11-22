@@ -163,7 +163,7 @@ const educationDocuments = [
   { qualification: 1, kind: 'Приложение', title: 'Приложение к диплому по клинической психологии', meta: 'Российский государственный социальный университет · 2017', src: 'assets/documents/diploma-clinical-psychology-2017-appendix.jpg', alt: 'Приложение к диплому по клинической психологии, 2017 год' },
   { qualification: 2, kind: 'Сертификат', title: 'НЛП Коуч Практик', meta: 'A&B Coach · 120 часов · 26 июля 2020', src: 'assets/documents/certificate-nlp-coach-2020.jpg', alt: 'Сертификат НЛП Коуч Практик, 2020 год' },
   { qualification: 3, kind: 'Сертификат', title: 'Timeline Transformation Seminar for Professionals', meta: 'Makani Academy · трёхдневная программа', src: 'assets/documents/certificate-timeline-transformation.jpg', alt: 'Сертификат Timeline Transformation Seminar for Professionals' },
-  { set: 'olga', kind: 'Диплом', title: 'Диплом психолога — Ольга Авдашина', meta: 'НОУ ВПО «Институт профессиональных инноваций» · 2011', src: 'assets/documents/olga-diploma-psychology-2011.jpg', alt: 'Диплом психолога Ольги Авдашиной, 2011 год' },
+  { set: 'olga', kind: 'Диплом', title: 'Диплом психолога — Ольга Авдашина (до брака Хромушина)', meta: 'НОУ ВПО «Институт профессиональных инноваций» · 2011 · выдан на добрачную фамилию Хромушина', src: 'assets/documents/olga-diploma-psychology-2011.jpg', alt: 'Диплом психолога Ольги Авдашиной (до брака Хромушиной), 2011 год' },
   { set: 'olga', kind: 'Диплом', title: 'Диплом о профессиональной переподготовке — Ольга Авдашина', meta: 'Российский государственный социальный университет · клиническая психология · 2017', src: 'assets/documents/olga-diploma-clinical-psychology-2017.jpg', alt: 'Диплом Ольги Авдашиной о переподготовке по клинической психологии, 2017 год' },
 ];
 
