@@ -494,3 +494,8 @@ html{scroll-padding-top:calc(var(--nav-h) + 16px)}
 .team-docs span{opacity:.7}
 .team-docs button{padding:0;border:0;background:none;color:inherit;font:600 13px Manrope,Arial,sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:zoom-in}
 .team-docs button:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+/* Карточка Ольги: «Уточнить запись» и «Дипломы» — две одинаковые ссылки в одном ряду (вместо отдельных кнопок документов) */
+.team-actions{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:auto}
+.team-actions .team-link{margin-top:0}
+button.team-link{appearance:none;background:none;border:0;border-bottom:1px solid currentColor;border-radius:0;padding:0 0 6px;color:inherit;font:600 14px Manrope,Arial,sans-serif;cursor:pointer}
+@media(max-width:760px){.team-actions{margin-top:24px}}
