@@ -1,10 +1,10 @@
-// Уведомление о cookie и (когда будет готова) Яндекс Метрика — как на belovet.ru.
+// Уведомление о cookie и Яндекс Метрика — как на belovet.ru.
 // Уведомление показывается на всех страницах, пока посетитель не нажмёт «Понятно»; отметка хранится в localStorage
 // (psy-berdnikova-cookie: seen) только на устройстве посетителя.
-// Метрика: впишите номер счётчика в METRIKA_ID — счётчик загрузится, а текст уведомления упомянет Метрику.
-// Перед этим обновите раздел 8 в privacy.html (там сейчас сказано, что аналитика не подключена).
+// Метрика: номер счётчика — METRIKA_ID; код инициализации — как в коде из интерфейса Метрики.
+// Метрика загружается сразу (как на belovet.ru), уведомление сообщает о ней; описание — раздел 8 privacy.html.
 (function () {
-  var METRIKA_ID = ''; // например '12345678'
+  var METRIKA_ID = 114510438; // Яндекс Метрика psy-berdnikova.ru (подключена 2026-11-23)
   var KEY = 'psy-berdnikova-cookie';
   window.PB_METRIKA = METRIKA_ID; // lead.js отправляет цель «lead» после заявки
 
@@ -22,7 +22,7 @@
       for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
       k = e.createElement(t); a = e.getElementsByTagName(t)[0]; k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
     })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=' + METRIKA_ID, 'ym');
-    window.ym(METRIKA_ID, 'init', { ssr: true, webvisor: true, clickmap: true, referrer: document.referrer, url: location.href, accurateTrackBounce: true, trackLinks: true });
+    window.ym(METRIKA_ID, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: 'dataLayer', referrer: document.referrer, url: location.href, accurateTrackBounce: true, trackLinks: true });
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a');
       if (!a) return;
