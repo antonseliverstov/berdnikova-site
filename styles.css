@@ -478,3 +478,6 @@ html{scroll-padding-top:calc(var(--nav-h) + 16px)}
 .team-photo--placeholder span{font:300 84px/1 "Cormorant Garamond",serif;letter-spacing:.02em;opacity:.75}
 @media(max-width:1200px){.team-photo--placeholder span{font-size:68px}}
 @media(max-width:760px){.team-photo--placeholder span{font-size:96px}}
+/* Заглушка: знак Феникс. Знак — только на тёмном фоне (правило брендбука), поэтому арка графитовая */
+.team-photo--placeholder{background:radial-gradient(120% 90% at 50% 35%,#2a2c33 0%,#1f2129 60%,#17181d 100%);border:0}
+.team-photo--placeholder img{width:66%;height:auto;max-width:none;object-fit:contain;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
