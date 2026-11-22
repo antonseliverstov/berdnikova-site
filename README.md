@@ -19,3 +19,4 @@
 - `api/lead.php` — приём заявок «Уточнить запись» (Ольга Авдашина): письмо на help@psy-berdnikova.ru и журнал согласий `~/yulia-berdnikova/private/consents.jsonl`. Работает только на хостинге с PHP; на GitHub и локально форма показывает телефон центра.
 - После правок `styles.css`/скриптов меняйте `?v=ДАТА` в ссылках на них в трёх HTML (сброс кэша браузера у посетителей).
 - `yandex_ab54f7f1b69c7984.html` — подтверждение прав в Яндекс Вебмастере (не удалять). `robots.txt` и `sitemap.xml` — при новых страницах дополнять sitemap.
+- `.htaccess` — перенаправление http/www → https://psy-berdnikova.ru (по X-Forwarded-Proto, как на belovet), сроки кэша, запрет .bak.
