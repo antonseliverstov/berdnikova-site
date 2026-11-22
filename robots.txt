@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /api/
+Disallow: /*.bak
+
+Sitemap: https://psy-berdnikova.ru/sitemap.xml
