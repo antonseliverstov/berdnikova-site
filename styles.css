@@ -521,3 +521,17 @@ button.team-link{appearance:none;background:none;border:0;border-bottom:1px soli
 .footer .footer-name{font-family:"Cormorant Garamond",serif;font-weight:300;letter-spacing:-.02em;line-height:.93;font-size:58px;margin:0 0 18px}
 @media(max-width:760px){.footer .footer-name{font-size:46px}}
 .not-found-actions .button{text-decoration:none}
+
+/* Стоимость: две услуги из YCLIENTS + формат приёма (23.11.2026) */
+.service-grid--two{grid-template-columns:1fr 1fr}
+.service-grid--two .service-card{min-height:520px}
+.service-grid--two .service-card h3{font-size:52px}
+.service-card.dark-card{background:var(--olive);color:var(--cream)}
+.service-facts{display:flex;gap:40px;margin:28px 0 32px}
+.service-facts div{display:grid;gap:6px}
+.service-facts dt{font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.service-facts dd{margin:0;font:300 40px/1 "Cormorant Garamond",serif}
+.service-format{display:flex;flex-wrap:wrap;gap:8px 40px;margin-top:24px;padding:22px 28px;border:1px solid rgba(255,241,207,.25);border-radius:20px;color:var(--cream);font-size:16px}
+.service-format p{margin:0}
+@media(max-width:1050px){.service-grid--two .service-card h3{font-size:42px}}
+@media(max-width:760px){.service-grid--two{grid-template-columns:1fr}.service-grid--two .service-card{min-height:0}.service-grid--two .service-card h3{font-size:36px}.service-facts{gap:28px;margin:22px 0 26px}.service-facts dd{font-size:34px}.service-format{flex-direction:column;padding:18px 20px;font-size:15px}}
