@@ -489,3 +489,8 @@ html{scroll-padding-top:calc(var(--nav-h) + 16px)}
 .review-side--cream{background:var(--cream)}
 .reviews-all{display:inline-flex;align-items:center;margin-top:28px;color:var(--cream);font-size:14px;font-weight:600;border-bottom:1px solid var(--sand);padding-bottom:6px}
 .reviews-all:hover{border-color:var(--cream)}
+/* Документы специалиста в карточке */
+.team-docs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:-8px 0 22px;font-size:13px}
+.team-docs span{opacity:.7}
+.team-docs button{padding:0;border:0;background:none;color:inherit;font:600 13px Manrope,Arial,sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:zoom-in}
+.team-docs button:focus-visible{outline:2px solid currentColor;outline-offset:3px}

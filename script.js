@@ -163,6 +163,8 @@ const educationDocuments = [
   { qualification: 1, kind: 'Приложение', title: 'Приложение к диплому по клинической психологии', meta: 'Российский государственный социальный университет · 2017', src: 'assets/documents/diploma-clinical-psychology-2017-appendix.jpg', alt: 'Приложение к диплому по клинической психологии, 2017 год' },
   { qualification: 2, kind: 'Сертификат', title: 'НЛП Коуч Практик', meta: 'A&B Coach · 120 часов · 26 июля 2020', src: 'assets/documents/certificate-nlp-coach-2020.jpg', alt: 'Сертификат НЛП Коуч Практик, 2020 год' },
   { qualification: 3, kind: 'Сертификат', title: 'Timeline Transformation Seminar for Professionals', meta: 'Makani Academy · трёхдневная программа', src: 'assets/documents/certificate-timeline-transformation.jpg', alt: 'Сертификат Timeline Transformation Seminar for Professionals' },
+  { set: 'olga', kind: 'Диплом', title: 'Диплом психолога — Ольга Авдашина', meta: 'НОУ ВПО «Институт профессиональных инноваций» · 2011', src: 'assets/documents/olga-diploma-psychology-2011.jpg', alt: 'Диплом психолога Ольги Авдашиной, 2011 год' },
+  { set: 'olga', kind: 'Диплом', title: 'Диплом о профессиональной переподготовке — Ольга Авдашина', meta: 'Российский государственный социальный университет · клиническая психология · 2017', src: 'assets/documents/olga-diploma-clinical-psychology-2017.jpg', alt: 'Диплом Ольги Авдашиной о переподготовке по клинической психологии, 2017 год' },
 ];
 
 const educationSection = document.querySelector('#education');
@@ -176,6 +178,19 @@ let currentDocument = 0;
 let documentZoom = 1;
 let documentFitWidth = 0;
 
+// Documents are grouped by owner (Yulia by default, Olga separately): the zoom window pages only within one group.
+const docSet = (index) => educationDocuments[index]?.set || 'yulia';
+const docGroup = (index) => educationDocuments.map((d, i) => i).filter((i) => docSet(i) === docSet(index));
+function docPositionLabel(index) {
+  const group = docGroup(index);
+  return `${group.indexOf(index) + 1} из ${group.length}`;
+}
+function stepDocument(direction) {
+  const group = docGroup(currentDocument);
+  const at = group.indexOf(currentDocument);
+  updateDocument(group[(at + direction + group.length) % group.length]);
+}
+
 // Current document for the zoom window; the window keeps its own prev/next through all 6 documents.
 function updateDocument(index, resetModalZoom = true) {
   currentDocument = (index + educationDocuments.length) % educationDocuments.length;
@@ -184,12 +199,14 @@ function updateDocument(index, resetModalZoom = true) {
     documentModalImage.src = documentData.src;
     documentModalImage.alt = documentData.alt;
     documentModalTitle.textContent = documentData.title;
-    documentModalPosition.textContent = `${currentDocument + 1} из ${educationDocuments.length}`;
+    documentModalPosition.textContent = docPositionLabel(currentDocument);
     if (resetModalZoom) documentModalImage.addEventListener('load', fitModalDocument, { once: true });
   }
-  [currentDocument - 1, currentDocument + 1].forEach((neighbor) => {
+  const group = docGroup(currentDocument);
+  const at = group.indexOf(currentDocument);
+  [at - 1, at + 1].forEach((neighbor) => {
     const preload = new Image();
-    preload.src = educationDocuments[(neighbor + educationDocuments.length) % educationDocuments.length].src;
+    preload.src = educationDocuments[group[(neighbor + group.length) % group.length]].src;
   });
 }
 
@@ -312,7 +329,7 @@ if (eduTrack && eduCount > 1) {
   requestAnimationFrame(() => eduJump(1));
 }
 
-educationSection?.querySelectorAll('[data-open-doc]').forEach((button) => {
+document.querySelectorAll('[data-open-doc]').forEach((button) => {
   button.addEventListener('click', () => {
     updateDocument(Number(button.dataset.openDoc));
     openDocumentModal();
@@ -345,7 +362,7 @@ function openDocumentModal() {
   documentModalImage.src = documentData.src;
   documentModalImage.alt = documentData.alt;
   documentModalTitle.textContent = documentData.title;
-  documentModalPosition.textContent = `${currentDocument + 1} из ${educationDocuments.length}`;
+  documentModalPosition.textContent = docPositionLabel(currentDocument);
   documentModal.showModal();
   requestAnimationFrame(fitModalDocument);
 }
@@ -354,8 +371,8 @@ document.querySelector('.document-modal-close')?.addEventListener('click', () =>
 document.querySelector('#document-zoom-in')?.addEventListener('click', () => setDocumentZoom(documentZoom + 0.25));
 document.querySelector('#document-zoom-out')?.addEventListener('click', () => setDocumentZoom(documentZoom - 0.25));
 zoomReset?.addEventListener('click', fitModalDocument);
-document.querySelector('#document-modal-prev')?.addEventListener('click', () => updateDocument(currentDocument - 1));
-document.querySelector('#document-modal-next')?.addEventListener('click', () => updateDocument(currentDocument + 1));
+document.querySelector('#document-modal-prev')?.addEventListener('click', () => stepDocument(-1));
+document.querySelector('#document-modal-next')?.addEventListener('click', () => stepDocument(1));
 
 let dragStart = null;
 documentPanArea?.addEventListener('pointerdown', (event) => {
@@ -379,8 +396,8 @@ documentModal?.addEventListener('close', () => {
 });
 document.addEventListener('keydown', (event) => {
   if (!documentModal?.open) return;
-  if (event.key === 'ArrowLeft') updateDocument(currentDocument - 1);
-  if (event.key === 'ArrowRight') updateDocument(currentDocument + 1);
+  if (event.key === 'ArrowLeft') stepDocument(-1);
+  if (event.key === 'ArrowRight') stepDocument(1);
   if (event.key === '+' || event.key === '=') setDocumentZoom(documentZoom + 0.25);
   if (event.key === '-') setDocumentZoom(documentZoom - 0.25);
   if (event.key === '0') fitModalDocument();
