@@ -481,3 +481,7 @@ html{scroll-padding-top:calc(var(--nav-h) + 16px)}
 /* Заглушка: знак Феникс. Знак — только на тёмном фоне (правило брендбука), поэтому арка графитовая */
 .team-photo--placeholder{background:radial-gradient(120% 90% at 50% 35%,#2a2c33 0%,#1f2129 60%,#17181d 100%);border:0}
 .team-photo--placeholder img{width:66%;height:auto;max-width:none;object-fit:contain;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
+/* Описание специалиста в карточке */
+.team-info h3{margin-bottom:16px}
+.team-desc{margin:16px 0 24px!important;font-size:14px;line-height:1.6!important;opacity:.9;max-width:360px}
+.team-card--dark .team-desc{color:var(--cream)}
