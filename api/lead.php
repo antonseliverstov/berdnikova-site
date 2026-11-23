@@ -1,5 +1,5 @@
 <?php
-// Приём заявок «Уточнить запись» (специалисты без онлайн-записи) на хостинге Timeweb: JSON от страницы → письмо на help@.
+// Приём заявок «Уточнить запись» (специалисты без онлайн-записи) и «Онлайн» (онлайн-консультация у Юлии: услуга + день) на хостинге Timeweb: JSON от страницы → письмо на help@.
 // Работает только на хостинге с PHP (на GitHub и локальном просмотре форма покажет телефон центра).
 // Доказательство согласия (ч. 3 ст. 9 152-ФЗ): каждая принятая заявка пишется в журнал ~/yulia-berdnikova/private/consents.jsonl —
 // вне папки сайта, по HTTP недоступен. Поля: номер заявки, время, специалист, отметки, редакция согласия, имя, телефон, страница.
@@ -8,7 +8,9 @@
 const MAIL_TO   = 'help@psy-berdnikova.ru';
 const MAIL_FROM = 'site@psy-berdnikova.ru';       // адрес на домене сайта, чтобы письмо не попадало в спам
 const HOSTS     = ['psy-berdnikova.ru', 'www.psy-berdnikova.ru'];
-const SPECIALISTS = ['Ольга Сергеевна Авдашина'];
+const SPECIALISTS = ['Ольга Сергеевна Авдашина', 'Юлия Юрьевна Бердникова'];
+const SERVICES  = ['Индивидуальная консультация', 'Семейное консультирование'];   // кнопка «Онлайн» в блоке цен
+const DAYS      = ['Понедельник'];                // четверг откроется позже: добавить сюда и снять disabled в форме
 const RATE_MAX  = 5;                              // не больше 5 заявок с одного IP за 10 минут
 const RATE_WIN  = 600;
 
@@ -39,6 +41,10 @@ $version = preg_replace('/[^0-9-]/', '', (string)($d['consent_version'] ?? ''));
 // Сервер сам отклоняет заявку без обеих отметок и без редакции согласия
 if ($name === '' || strlen($digits) !== 11 || ($d['privacy'] ?? false) !== true || ($d['consent'] ?? false) !== true || $version === '') out(400, ['ok' => false, 'error' => 'fields']);
 $specialist = in_array($d['specialist'] ?? '', SPECIALISTS, true) ? $d['specialist'] : 'не указан';
+$online = ($d['kind'] ?? '') === 'online';
+$service = $online && in_array($d['service'] ?? '', SERVICES, true) ? $d['service'] : '';
+$day = $online && in_array($d['day'] ?? '', DAYS, true) ? $d['day'] : '';
+if ($online && ($service === '' || $day === '')) out(400, ['ok' => false, 'error' => 'day']);
 $page = clean(cut($d['page'] ?? '', 300));
 
 date_default_timezone_set('Europe/Moscow');
@@ -47,12 +53,12 @@ $id = date('Ymd-His') . '-' . bin2hex(random_bytes(3));
 // Журнал согласий пишется до отправки письма: без записи в журнал заявку не принимаем
 $logDir = dirname(__DIR__, 2) . '/private';
 if (!is_dir($logDir)) { @mkdir($logDir, 0700, true); @file_put_contents($logDir . '/.htaccess', "Require all denied\n"); }
-$entry = json_encode(['id' => $id, 'at' => date('c'), 'specialist' => $specialist, 'privacy' => true, 'consent' => true,
+$entry = json_encode(['id' => $id, 'at' => date('c'), 'specialist' => $specialist, 'kind' => $online ? 'online' : 'specialist', 'service' => $service, 'day' => $day, 'privacy' => true, 'consent' => true,
   'consent_version' => $version, 'name' => $name, 'phone' => $phone, 'page' => $page], JSON_UNESCAPED_UNICODE);
 if (@file_put_contents($logDir . '/consents.jsonl', $entry . "\n", FILE_APPEND | LOCK_EX) === false) out(500, ['ok' => false, 'error' => 'log']);
 
-$text = "Заявка на консультацию с сайта psy-berdnikova.ru\n\n"
-  . "Специалист: $specialist\nИмя: $name\nТелефон: $phone\n"
+$text = ($online ? "Заявка на онлайн-консультацию" : "Заявка на консультацию") . " с сайта psy-berdnikova.ru\n\n"
+  . "Специалист: $specialist\n" . ($online ? "Услуга: $service, онлайн\nДень: $day\n" : '') . "Имя: $name\nТелефон: $phone\n"
   . 'Время: ' . date('d.m.Y H:i') . " (МСК)\nСтраница: $page\nЗаявка №: $id\nСогласие: отметки поставлены, редакция $version\n\n"
   . "Позвонить: tel:+$digits\n";
 $enc = fn($s) => '=?UTF-8?B?' . base64_encode($s) . '?=';
@@ -62,7 +68,7 @@ $headers = implode("\r\n", [
   'Content-Type: text/plain; charset=UTF-8',
   'Content-Transfer-Encoding: base64'
 ]);
-if (!mail(MAIL_TO, $enc("Заявка к специалисту: $name, $phone"), chunk_split(base64_encode($text)), $headers, '-f' . MAIL_FROM)) out(502, ['ok' => false, 'error' => 'delivery']);
+if (!mail(MAIL_TO, $enc(($online ? "Онлайн-консультация, $day" : 'Заявка к специалисту') . ": $name, $phone"), chunk_split(base64_encode($text)), $headers, '-f' . MAIL_FROM)) out(502, ['ok' => false, 'error' => 'delivery']);
 
 $hits[] = time();
 @file_put_contents($ipKey, implode("\n", $hits));

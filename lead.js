@@ -1,4 +1,5 @@
-// Заявка на консультацию к специалисту без онлайн-записи (сейчас — Ольга Авдашина).
+// Заявка на консультацию: к специалисту без онлайн-записи (сейчас — Ольга Авдашина)
+// и на онлайн-консультацию к Юлии (кнопка «Онлайн», data-mode="online": услуга + день; четверг пока закрыт).
 // Боковое окно с формой «имя + телефон + две отметки согласия» → POST JSON на api/lead.php (работает на хостинге с PHP).
 // Если отправить не удалось, человек видит телефон центра.
 (function () {
@@ -9,6 +10,13 @@
   var errorBox = dialog.querySelector('.lead-error');
   var submit = dialog.querySelector('.lead-submit');
   var title = dialog.querySelector('#lead-title');
+  var intro = dialog.querySelector('.lead-intro');
+  var onlineOnly = dialog.querySelectorAll('[data-online-only]');
+  var mode = 'specialist';
+  var INTRO = {
+    specialist: 'Оставьте имя и телефон — мы перезвоним и согласуем удобное время консультации. Описывать ситуацию не нужно.',
+    online: 'Оставьте имя и телефон и выберите день — мы перезвоним и согласуем время онлайн-консультации. Описывать ситуацию не нужно.'
+  };
   var phone = form.elements.phone;
   var opener = null;
   var ENDPOINT = 'api/lead.php';
@@ -37,10 +45,16 @@
 
   function open(link) {
     opener = link;
-    var who = link.getAttribute('data-specialist') || '';
+    mode = link.getAttribute('data-mode') === 'online' ? 'online' : 'specialist';
+    var who = mode === 'online' ? 'Юлия Юрьевна Бердникова' : (link.getAttribute('data-specialist') || '');
+    var service = link.getAttribute('data-service') || '';
     form.elements.specialist.value = who;
+    form.elements.service.value = mode === 'online' ? service : '';
     var short = who.split(' ');
-    title.textContent = who ? 'Запись к ' + (short[0] === 'Ольга' ? 'Ольге Авдашиной' : who) : 'Заявка на консультацию';
+    if (mode === 'online') title.textContent = 'Онлайн: ' + (service ? service.toLowerCase() : 'консультация');
+    else title.textContent = who ? 'Запись к ' + (short[0] === 'Ольга' ? 'Ольге Авдашиной' : who) : 'Заявка на консультацию';
+    intro.textContent = INTRO[mode];
+    onlineOnly.forEach(function (el) { el.hidden = mode !== 'online'; });
     form.hidden = false; done.hidden = true; errorBox.hidden = true;
     document.documentElement.classList.add('booking-open');
     dialog.showModal();
@@ -85,9 +99,18 @@
     if (tel.length !== 11) { showError('Укажите телефон полностью: +7 и 10 цифр.'); phone.focus(); return; }
     if (!form.elements.privacy.checked || !form.elements.consent.checked) { showError('Чтобы отправить заявку, отметьте обе галочки.'); return; }
 
+    var day = '';
+    if (mode === 'online') {
+      var picked = form.querySelector('input[name="day"]:checked:not(:disabled)');
+      if (!picked) { showError('Выберите день онлайн-консультации.'); return; }
+      day = picked.value;
+    }
+
     var data = {
-      kind: 'specialist',
+      kind: mode,
       specialist: form.elements.specialist.value,
+      service: form.elements.service.value,
+      day: day,
       name: name,
       phone: formatPhone(tel),
       website: form.elements.website.value,
@@ -102,7 +125,7 @@
       .then(function (res) {
         if (res.body && res.body.ok) {
           form.reset(); form.hidden = true; done.hidden = false;
-          if (window.ym && window.PB_METRIKA) window.ym(window.PB_METRIKA, 'reachGoal', 'lead');
+          if (window.ym && window.PB_METRIKA) window.ym(window.PB_METRIKA, 'reachGoal', mode === 'online' ? 'online' : 'lead');
         } else if (res.status === 429) {
           showError('Заявок с этого устройства слишком много. Попробуйте позже или позвоните: <a href="tel:+79029083003">+7 902 908 30 03</a>.');
         } else {

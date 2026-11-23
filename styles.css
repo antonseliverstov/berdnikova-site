@@ -501,11 +501,11 @@ button.team-link{appearance:none;background:none;border:0;border-bottom:1px soli
 @media(max-width:760px){.team-actions{margin-top:24px}}
 
 /* SEO-правки 23.11.2026: город в H1 и адрес в контактах */
-.hero h1 .hero-city{display:block;margin-top:22px;font:600 15px/1.2 Manrope,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;white-space:normal;color:var(--olive)}
+.hero h1 .hero-city{display:block;margin-top:22px;font-size:.5em;line-height:.85;letter-spacing:-.05em;text-transform:uppercase;white-space:nowrap;color:inherit}
 .footer-address{font-size:14px;line-height:1.5;margin:0}
 .hero h1 span:nth-child(2){margin-top:12px}
 .hero h1 span.hero-city{margin-top:22px}
-@media(max-width:760px){.hero h1 span.hero-city{font-size:12px;margin-top:14px}}
+@media(max-width:760px){.hero h1 span.hero-city{font-size:.5em;margin-top:10px}.hero-name{top:196px}}
 .not-found .eyebrow{color:var(--olive);margin:0 0 14px}
 .not-found-actions{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 28px}
 .not-found-actions .button.light{border:1px solid var(--olive)}
@@ -535,3 +535,26 @@ button.team-link{appearance:none;background:none;border:0;border-bottom:1px soli
 .service-format p{margin:0}
 @media(max-width:1050px){.service-grid--two .service-card h3{font-size:42px}}
 @media(max-width:760px){.service-grid--two{grid-template-columns:1fr}.service-grid--two .service-card{min-height:0}.service-grid--two .service-card h3{font-size:36px}.service-facts{gap:28px;margin:22px 0 26px}.service-facts dd{font-size:34px}.service-format{flex-direction:column;padding:18px 20px;font-size:15px}}
+
+/* Отзывы — только цитаты */
+q{quotes:"«" "»" "„" "“"}
+.review-side q{display:block;font:300 32px/1.2 "Cormorant Garamond",serif;letter-spacing:-.01em}
+@media(max-width:760px){.review-side q{font-size:24px}}
+
+/* Кнопка «Онлайн» и выбор дня онлайн-консультации */
+.service-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.button.button-outline{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.button.button-outline:hover{background:rgba(23,23,19,.07)}
+.dark-card .button.button-outline:hover{background:rgba(255,241,207,.12)}
+.lead-days{margin:0;padding:0;border:0;display:grid;gap:10px;min-width:0}
+.lead-days[hidden]{display:none!important}
+.lead-days legend{padding:0;margin-bottom:8px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.lead-days-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lead-day{position:relative;cursor:pointer}
+.lead-day input{position:absolute;opacity:0;pointer-events:none}
+.lead-day span{display:flex;align-items:center;justify-content:center;min-height:54px;padding:0 14px;border:1px solid var(--taupe);border-radius:16px;background:var(--white);font-size:16px;font-weight:600;transition:background .2s,color .2s,border-color .2s}
+.lead-day input:checked+span{background:var(--olive);border-color:var(--olive);color:var(--cream)}
+.lead-day input:focus-visible+span{outline:2px solid var(--olive);outline-offset:2px}
+.lead-day.is-soon{cursor:not-allowed}
+.lead-day.is-soon span{background:#efe6cf;border:1px dashed var(--taupe);color:var(--taupe)}
+.lead-soon{margin:0;font-size:14px;color:var(--taupe)}
