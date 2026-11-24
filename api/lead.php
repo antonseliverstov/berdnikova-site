@@ -8,7 +8,7 @@
 const MAIL_TO   = 'help@psy-berdnikova.ru';
 const MAIL_FROM = 'site@psy-berdnikova.ru';       // адрес на домене сайта, чтобы письмо не попадало в спам
 const HOSTS     = ['psy-berdnikova.ru', 'www.psy-berdnikova.ru'];
-const SPECIALISTS = ['Ольга Сергеевна Авдашина', 'Юлия Юрьевна Бердникова'];
+const SPECIALISTS = ['Ольга Сергеевна Авдашина', 'Марина Владимировна Крючкова', 'Юлия Юрьевна Бердникова'];
 const SERVICES  = ['Индивидуальная консультация', 'Семейное консультирование'];   // кнопка «Онлайн» в блоке цен
 const DAYS      = ['Понедельник'];                // четверг откроется позже: добавить сюда и снять disabled в форме
 const RATE_MAX  = 5;                              // не больше 5 заявок с одного IP за 10 минут

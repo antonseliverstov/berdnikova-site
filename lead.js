@@ -1,4 +1,4 @@
-// Заявка на консультацию: к специалисту без онлайн-записи (сейчас — Ольга Авдашина)
+// Заявка на консультацию: к специалисту без онлайн-записи (сейчас — Ольга Авдашина и Марина Крючкова)
 // и на онлайн-консультацию к Юлии (кнопка «Онлайн», data-mode="online": услуга + день; четверг пока закрыт).
 // Боковое окно с формой «имя + телефон + две отметки согласия» → POST JSON на api/lead.php (работает на хостинге с PHP).
 // Если отправить не удалось, человек видит телефон центра.
@@ -13,6 +13,7 @@
   var intro = dialog.querySelector('.lead-intro');
   var onlineOnly = dialog.querySelectorAll('[data-online-only]');
   var mode = 'specialist';
+  var DATIVE = { 'Ольга Сергеевна Авдашина': 'Ольге Авдашиной', 'Марина Владимировна Крючкова': 'Марине Крючковой' };
   var INTRO = {
     specialist: 'Оставьте имя и телефон — мы перезвоним и согласуем удобное время консультации. Описывать ситуацию не нужно.',
     online: 'Оставьте имя и телефон и выберите день — мы перезвоним и согласуем время онлайн-консультации. Описывать ситуацию не нужно.'
@@ -52,7 +53,7 @@
     form.elements.service.value = mode === 'online' ? service : '';
     var short = who.split(' ');
     if (mode === 'online') title.textContent = 'Онлайн: ' + (service ? service.toLowerCase() : 'консультация');
-    else title.textContent = who ? 'Запись к ' + (short[0] === 'Ольга' ? 'Ольге Авдашиной' : who) : 'Заявка на консультацию';
+    else title.textContent = who ? 'Запись к ' + (DATIVE[who] || who) : 'Заявка на консультацию';
     intro.textContent = INTRO[mode];
     onlineOnly.forEach(function (el) { el.hidden = mode !== 'online'; });
     form.hidden = false; done.hidden = true; errorBox.hidden = true;

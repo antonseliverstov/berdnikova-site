@@ -558,3 +558,7 @@ q{quotes:"«" "»" "„" "“"}
 .lead-day.is-soon{cursor:not-allowed}
 .lead-day.is-soon span{background:#efe6cf;border:1px dashed var(--taupe);color:var(--taupe)}
 .lead-soon{margin:0;font-size:14px;color:var(--taupe)}
+
+/* Три специалиста: руководитель центра — во всю ширину, двое — под ней */
+.team-grid--three .team-card--dark{grid-column:1/-1}
+.team-grid--three .team-card--dark .team-desc{max-width:620px}

@@ -165,6 +165,9 @@ const educationDocuments = [
   { qualification: 3, kind: 'Сертификат', title: 'Timeline Transformation Seminar for Professionals', meta: 'Makani Academy · трёхдневная программа', src: 'assets/documents/certificate-timeline-transformation.jpg', alt: 'Сертификат Timeline Transformation Seminar for Professionals' },
   { set: 'olga', kind: 'Диплом', title: 'Диплом психолога — Ольга Авдашина (до брака Хромушина)', meta: 'НОУ ВПО «Институт профессиональных инноваций» · 2011 · выдан на добрачную фамилию Хромушина', src: 'assets/documents/olga-diploma-psychology-2011.jpg', alt: 'Диплом психолога Ольги Авдашиной (до брака Хромушиной), 2011 год' },
   { set: 'olga', kind: 'Диплом', title: 'Диплом о профессиональной переподготовке — Ольга Авдашина', meta: 'Российский государственный социальный университет · клиническая психология · 2017', src: 'assets/documents/olga-diploma-clinical-psychology-2017.jpg', alt: 'Диплом Ольги Авдашиной о переподготовке по клинической психологии, 2017 год' },
+  { set: 'marina', kind: 'Диплом', title: 'Диплом психолога — Марина Крючкова', meta: 'НОУ ВПО «Институт профессиональных инноваций» · 2010 · квалификация «Психолог. Преподаватель психологии»', src: 'assets/documents/marina-diploma-psychology-2010.jpg', alt: 'Диплом психолога Марины Крючковой, 2010 год' },
+  { set: 'marina', kind: 'Удостоверение', title: 'Психологическая коррекция кризисных состояний и посттравматического стресса — Марина Крючкова', meta: 'Московский институт лингвистики, «Институт практической психологии и психоанализа» · 72 часа · 2016', src: 'assets/documents/marina-certificate-crisis-ptsd-2016.jpg', alt: 'Удостоверение Марины Крючковой о повышении квалификации: коррекция кризисных состояний и посттравматического стресса, 2016 год' },
+  { set: 'marina', kind: 'Удостоверение', title: 'Психотерапия зависимого поведения и психотерапия горя — Марина Крючкова', meta: 'Московский институт лингвистики, «Институт практической психологии и психоанализа» · 36 часов · 2016', src: 'assets/documents/marina-certificate-addiction-grief-2016.jpg', alt: 'Удостоверение Марины Крючковой о повышении квалификации: психотерапия зависимого поведения и горя, 2016 год' },
 ];
 
 const educationSection = document.querySelector('#education');
@@ -178,7 +181,7 @@ let currentDocument = 0;
 let documentZoom = 1;
 let documentFitWidth = 0;
 
-// Documents are grouped by owner (Yulia by default, Olga separately): the zoom window pages only within one group.
+// Documents are grouped by owner (Yulia by default, Olga and Marina separately): the zoom window pages only within one group.
 const docSet = (index) => educationDocuments[index]?.set || 'yulia';
 const docGroup = (index) => educationDocuments.map((d, i) => i).filter((i) => docSet(i) === docSet(index));
 function docPositionLabel(index) {
