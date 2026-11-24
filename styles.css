@@ -501,11 +501,11 @@ button.team-link{appearance:none;background:none;border:0;border-bottom:1px soli
 @media(max-width:760px){.team-actions{margin-top:24px}}
 
 /* SEO-правки 23.11.2026: город в H1 и адрес в контактах */
-.hero h1 .hero-city{display:block;margin-top:22px;font-size:.5em;line-height:.85;letter-spacing:-.05em;text-transform:uppercase;white-space:nowrap;color:inherit}
+.hero h1 .hero-city{display:block;text-transform:uppercase;white-space:nowrap;color:inherit}
 .footer-address{font-size:14px;line-height:1.5;margin:0}
 .hero h1 span:nth-child(2){margin-top:12px}
-.hero h1 span.hero-city{margin-top:22px}
-@media(max-width:760px){.hero h1 span.hero-city{font-size:.5em;margin-top:10px}.hero-name{top:196px}}
+.hero h1 span.hero-city{margin-top:12px}
+@media(max-width:760px){.hero h1 span.hero-city{margin-top:8px}}
 .not-found .eyebrow{color:var(--olive);margin:0 0 14px}
 .not-found-actions{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 28px}
 .not-found-actions .button.light{border:1px solid var(--olive)}
@@ -562,3 +562,21 @@ q{quotes:"«" "»" "„" "“"}
 /* Три специалиста: руководитель центра — во всю ширину, двое — под ней */
 .team-grid--three .team-card--dark{grid-column:1/-1}
 .team-grid--three .team-card--dark .team-desc{max-width:620px}
+
+/* Аудит отображения 24.11: «в Туле» в размер заголовка */
+.service-grid--two{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:760px){
+  .service-grid--two{grid-template-columns:minmax(0,1fr)}
+  .service-grid--two .service-card h3{font-size:clamp(28px,9vw,36px)}
+  /* имя под трёхстрочным заголовком: высота заголовка ≈ 2,46 × размер шрифта */
+  .hero-name{top:calc(78px + 2.46 * clamp(43px,12.4vw,51px))}
+}
+/* Невысокие экраны ноутбуков (1366×768, 1280×720…): первый экран целиком, имя не уходит за край */
+@media(min-width:1051px) and (max-height:860px){
+  .hero{min-height:max(620px,100vh)}
+  .hero-main{min-height:max(532px,calc(100vh - 88px))}
+  .hero h1{font-size:clamp(84px,min(9.8vw,15vh),148px)}
+  .hero-name{top:calc(100vh - 290px)}
+  .hero-art{height:calc(100vh - 128px)}
+  .hero-accent{top:auto;bottom:5vh;width:min(520px,66vh);height:min(500px,63vh)}
+}
