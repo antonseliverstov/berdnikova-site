@@ -570,8 +570,8 @@ q{quotes:"«" "»" "„" "“"}
   .service-grid--two .service-card h3{font-size:clamp(28px,9vw,36px)}
   /* имя под трёхстрочным заголовком: высота заголовка ≈ 2,46 × размер шрифта */
   .hero-name{top:calc(78px + 2.46 * clamp(43px,12.4vw,51px))}
-  /* на широких телефонах (Plus/Pro Max) портрет не растёт вверх и не наезжает на имя */
-  .hero-art{left:0;right:0;width:min(100%,345px);margin:0 auto}
+  /* портрет сдвинут вправо, чтобы голова не наезжала на имя (на широких телефонах фото выше) */
+  .hero-art{translate:clamp(72px,22vw,96px) 0}
 }
 /* Невысокие экраны ноутбуков (1366×768, 1280×720…): первый экран целиком, имя не уходит за край */
 @media(min-width:1051px) and (max-height:860px){
@@ -582,4 +582,6 @@ q{quotes:"«" "»" "„" "“"}
   .hero-art{height:calc(100vh - 128px)}
   .hero-accent{top:auto;bottom:5vh;width:min(520px,66vh);height:min(500px,63vh)}
 }
-@media(max-width:360px){.hero-main{min-height:690px}}
+
+/* Логотип-Феникс в шапке на телефоне вместо «ЮБ» */
+.brand-mobile img{display:block;width:auto;height:46px}
